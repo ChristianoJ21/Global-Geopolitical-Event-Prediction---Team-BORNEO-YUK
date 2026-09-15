@@ -1,0 +1,34 @@
+# Task 1 — data acquisition & preprocessing
+# Pinned with >= so a lab machine can resolve, but the manifest records the
+# exact versions that produced a given dataset.
+
+# core
+pandas>=2.0
+numpy>=1.24
+pyyaml>=6.0
+requests>=2.31
+pyarrow>=14.0          # parquet; the pipeline falls back to CSV without it
+openpyxl>=3.1          # reads Bank Indonesia's JISDOR .xlsx export
+
+# text
+ftfy>=6.1              # mojibake repair ("â€™" -> "'")
+nltk>=3.8              # stopwords + WordNet lemmatizer (optional; see below)
+
+# analysis / reporting
+matplotlib>=3.7
+statsmodels>=0.14      # used from Task 2 onward (ADF, Granger, Newey-West)
+tqdm>=4.66
+
+# testing
+pytest>=7.4
+
+# ---------------------------------------------------------------------------
+# One-time NLTK corpora download (Track A only; the pipeline degrades
+# gracefully to a bundled stopword list and a suffix lemmatizer without them):
+#
+#   python -m nltk.downloader stopwords wordnet omw-1.4
+#
+# Task 2 will add: scikit-learn, transformers, torch, sentencepiece.
+# They are deliberately NOT required for Task 1 — acquisition should run on a
+# laptop with no GPU and no multi-gigabyte model download.
+# ---------------------------------------------------------------------------
