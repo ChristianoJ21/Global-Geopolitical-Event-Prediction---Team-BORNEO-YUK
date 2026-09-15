@@ -1,5 +1,5 @@
 # Predicting Global Geopolitical Events: Impact on the USD/IDR Exchange Rate
-### Task 1 — Data Acquisition & Strategic Preprocessing
+### Data Acquisition & Strategic Preprocessing
 
 **Hypothesis under test.** Global geopolitical news carries significant information about, and is useful for predicting, fluctuations in the US dollar exchange rate — measured here as USD/IDR, Bank Indonesia's JISDOR reference rate.
 
