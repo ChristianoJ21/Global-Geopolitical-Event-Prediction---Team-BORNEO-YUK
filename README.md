@@ -62,7 +62,7 @@ The files marked "no" and the `data/cache/` folder are not in the repo: GitHub r
 
 ---
 
-## Pipeline
+##
 
 ```
   BI JISDOR export ─► fx_data (parse, validate) ─► targets (log returns, UP / FLAT / DOWN)
