@@ -1,0 +1,386 @@
+# =============================================================================
+# Task 1 — Strategic Data Acquisition & Preprocessing
+# Project: Predicting Global Geopolitical Events — Impact on the USD Exchange Rate
+#
+# EVERY value in this file is a DESIGN DECISION made by the team, not a default.
+# The rationale for each block is in the comments below and in the team's report.
+# Changing a value here changes the pipeline; nothing is hard-coded in src/.
+# =============================================================================
+
+project:
+  name: geo-usd
+  random_seed: 42          # fixed for every stochastic step (sampling, hashing salt)
+  timezone_market: Asia/Jakarta   # FX day convention anchor — JISDOR is a WIB rate
+
+# -----------------------------------------------------------------------------
+# 1. TEMPORAL SCOPE
+# Mandated by the assignment brief (Task 1, requirement 2a): "Retrieve daily
+# exchange rate data for USD from 1st September 2021 - 1st September 2026."
+# Exactly 5 years, not a span we chose for macro-regime coverage.
+# -----------------------------------------------------------------------------
+period:
+  start: "2021-09-01"
+  end:   "2026-09-01"
+  # Chronological split. NEVER shuffle: FX series are autocorrelated and
+  # a random split leaks the future into the training set. ~60/20/20.
+  train_end: "2024-08-31"
+  val_end:   "2025-08-31"     # test = 2025-09-01 .. end
+
+# -----------------------------------------------------------------------------
+# 2. TARGET VARIABLE
+# Mandated: "Use Bank Indonesia as the ultimate source" (requirement 2b) — so
+# the target is USD/IDR, not a broad USD basket or DXY. A broad basket would
+# be the wrong call here anyway: JISDOR is Indonesia's own reference rate and
+# moves on Indonesia-specific news (BI policy, domestic politics, commodity
+# exports) that a basket index would dilute away.
+#
+# ACQUISITION: USD_IDR is BI's official JISDOR export from bi.go.id (JISDOR
+# page -> period 01/09/2021-01/09/2026 -> "Unduh"), saved unmodified in
+# data/raw/. Downloaded in a browser because bi.go.id refuses scripted
+# clients and ignores scripted form postbacks (see src/fx_data.py).
+# Yahoo's IDR=X is fetched alongside ONLY as an independent cross-check.
+# -----------------------------------------------------------------------------
+target:
+  primary: USD_IDR
+  transform: log_return_pct     # r_t = 100 * ln(P_t / P_{t-1})
+  # Ternary direction label with a dead-zone: moves smaller than `flat_band_bp`
+  # basis points are labelled FLAT. Without this the model spends its capacity
+  # learning microstructure noise instead of geopolitics.
+  flat_band_bp: 10              # 0.10% ; recheck against USD/IDR's own daily sigma
+  horizons: [1, 3, 5]           # predict r_{t+1}, cumulative r_{t+1..t+3}, r_{t+1..t+5}
+  aux_targets:
+    - ABS_RETURN                # realized volatility proxy |r_t|
+    - REALIZED_VOL_5D
+
+fx_series:
+  # keyless sources only — no API registration required by any team member
+  bank_indonesia:              # official JISDOR export, path relative to the repo root
+    USD_IDR:  "data/raw/Informasi Kurs Jisdor.xlsx"
+  yahoo:                       # https://query1.finance.yahoo.com/v8/finance/chart/<ticker>
+    USD_IDR_YAHOO: "IDR=X"     # cross-check on the BI series only; never a model input
+    DXY:      "DX-Y.NYB"       # control: is a move USD/IDR-specific or dollar-wide?
+    VIX:      "^VIX"           # control: risk-off flight-to-dollar vs dollar-specific
+    BRENT:    "BZ=F"           # oil — Indonesia is a net commodity exporter/importer
+
+# -----------------------------------------------------------------------------
+# 3. NEWS CORPUS — GDELT 2.0
+# Two complementary layers (report §3.2):
+#   doc      -> article-level HEADLINES (the text the NLP models actually read)
+#   timeline -> cheap daily volume/tone series per theme (1 request per span)
+# We store headline + URL only. We never redistribute article full text:
+# that would be a copyright violation. See report §9.2.
+# -----------------------------------------------------------------------------
+gdelt:
+  doc_api: "https://api.gdeltproject.org/api/v2/doc/doc"
+  max_records_per_call: 250     # hard API cap
+  chunk: "day"                  # day-by-day chunking => uniform temporal sampling
+  languages: ["english"]        # see report §9.1 for the coverage-bias this creates
+  # GDELT enforces "one request every 5 seconds" per IP and answers HTTP 429
+  # with a plain-text scolding when you exceed it. 1.2s tripped that on the
+  # second request and pushed the IP into a sticky penalty state, so almost
+  # every call then had to be retried: measured throughput was ~88s per
+  # successful fetch against a possible ~16s. 6.0s sits just above the
+  # documented limit.
+  # NOTE: the limit is per-IP, not per-process. Never run two build_dataset
+  # processes at once; they throttle each other. See the lockfile guard in
+  # src/http_cache.py.
+  sleep_seconds: 6.0
+  max_retries: 6                # was 4: a 429 storm exhausted it and silently dropped the day
+  backoff_factor: 3.0           # was 2.0: back off hard off a rate limit, not gently
+  timeout_seconds: 60
+
+# Where the article layer comes from (override per run with --source):
+#   gkg -> GDELT's bulk 15-minute GKG files (src/gkg.py). Static files, not behind
+#          the DOC API's per-IP quota, which blocked this project's IP for over a
+#          day in September 2026 after ~2.5 h of fetching.
+#   doc -> the DOC 2.0 API above (src/gdelt.py), kept so earlier runs reproduce.
+# Same theme_families either way, so retrieval stays theme-driven (§4.2).
+news_source: gkg
+
+gkg:
+  base_url: "http://data.gdeltproject.org/gdeltv2"
+  files_per_day: 4              # evenly spaced 15-min slices: 00:00, 06:00, 12:00, 18:00 UTC
+  slot_offset_minutes: 0
+  per_family_daily_cap: 250     # the DOC API's budget per family per day, kept so corpus
+                                # size matches the original design; drawn at random
+                                # (seeded) instead of "the most recent 250"
+  workers: 4                    # parallel downloads; a static file server, no request quota
+  timeout_seconds: 120          # files are 4-14 MB
+  max_retries: 4
+  backoff_factor: 2.0
+
+# -----------------------------------------------------------------------------
+# 4. STAGE-1 THEMATIC GATE (recall-oriented)
+# We query by GDELT *theme codes*, not free keywords.
+# Rationale (report §4.2): keyword vocabularies drift over a 5-year window
+# ("de-dollarisation" barely exists before 2022), which would silently make the
+# corpus non-stationary. GDELT's theme taxonomy is machine-coded with a fixed
+# codebook, so a theme means the same thing in 2017 and in 2026.
+# Each family becomes its own feature column downstream.
+# -----------------------------------------------------------------------------
+theme_families:
+  conflict:
+    - "ARMEDCONFLICT"
+    - "MILITARY"
+    - "WB_2457_TERRORISM"
+    - "CRISISLEX_CRISISLEXREC"
+    - "SIEGE"
+  sanctions_trade:
+    - "ECON_SANCTIONS"
+    - "ECON_TRADE_DISPUTE"
+    - "ECON_TARIFF"
+    - "ECON_FREETRADE"
+    - "WTO"
+  diplomacy:
+    - "DIPLOMATIC_COOPERATION"
+    - "NEGOTIATIONS"
+    - "TREATY"
+    - "ALLIANCE"
+    - "SUMMIT"
+  energy:
+    - "ENV_OIL"
+    - "ENV_GAS"
+    - "ECON_OILPRICE"
+    - "ENV_NUCLEARPOWER"
+  monetary_policy:
+    - "ECON_INTEREST_RATES"
+    - "ECON_CENTRALBANK"
+    - "ECON_INFLATION"
+    - "ECON_CURRENCY_EXCHANGE_RATE"
+    - "ECON_CURRENCY_RESERVES"
+  political_risk:
+    - "ECON_UNCERTAINTY"          # GDELT's economic-policy-uncertainty theme
+    - "PROTEST"
+    - "ELECTION"
+    - "GOVERNMENT_INSTABILITY"
+    - "CORRUPTION"
+
+# Free-text market-relevance terms used ONLY in Stage 2 (precision gate),
+# never as the primary retrieval key.
+materiality_terms:
+  - dollar
+  - greenback
+  - yuan
+  - renminbi
+  - euro
+  - yen
+  - tariff
+  - sanction
+  - embargo
+  - "rate hike"
+  - "rate cut"
+  - "federal reserve"
+  - "central bank"
+  - "bond yield"
+  - "oil price"
+  - "foreign reserves"
+  - swift
+  - imf
+  - opec
+  - "trade deficit"
+  - "capital flight"
+  - devaluation
+  # Indonesia-specific transmission channels for USD/IDR
+  - rupiah
+  - jisdor
+  - "bi rate"
+  - nickel                        # Indonesia is the world's largest producer
+  - coal                          # a top export; prices move the current account
+  - "palm oil"                    # likewise
+  - "export ban"                  # e.g. the 2020 nickel-ore and 2022 palm-oil bans
+
+# -----------------------------------------------------------------------------
+# 5. STAGE-2 MATERIALITY GATE
+# An article survives only if it plausibly touches the USD transmission channel.
+# Rationale (report §4.3): a cabinet reshuffle in a country with 0.05% of world
+# trade does not move the dollar. We are building a *predictive* corpus, not an
+# archive of world events. Keeping such articles adds variance, not signal.
+# -----------------------------------------------------------------------------
+materiality:
+  require_any_of: ["actor_country", "institution", "market_term"]
+  # G20 + reserve-currency + geopolitically pivotal states, as GDELT source/
+  # location country codes (FIPS 10-4, which is what GDELT emits).
+  actor_countries:
+    - US   # United States
+    - CH   # China
+    - JA   # Japan
+    - GM   # Germany
+    - UK   # United Kingdom
+    - FR   # France
+    - IT   # Italy
+    - CA   # Canada
+    - RS   # Russia
+    - IN   # India
+    - BR   # Brazil
+    - SA   # Saudi Arabia
+    - IR   # Iran
+    - KS   # South Korea
+    - TU   # Turkey
+    - AS   # Australia
+    - MX   # Mexico
+    - SF   # South Africa
+    - ID   # Indonesia
+    - UP   # Ukraine
+    - IS   # Israel
+    - TW   # Taiwan
+    - KN   # North Korea
+    - VE   # Venezuela
+    - EZ   # Eurozone / EU institutions
+    # ASEAN neighbours: regional shocks hit IDR before they reach "the dollar"
+    - MY   # Malaysia
+    - SN   # Singapore
+    - RP   # Philippines
+    - TH   # Thailand
+    - VM   # Vietnam
+  institutions:
+    - "federal reserve"
+    - "european central bank"
+    - "bank of japan"
+    - "people's bank of china"
+    - "bank of england"
+    - "imf"
+    - "world bank"
+    - "opec"
+    - "nato"
+    - "wto"
+    - "brics"
+    - "g7"
+    - "g20"
+    - "united nations security council"
+    - "treasury department"
+    # Indonesia-specific: the target is USD/IDR, so the institutions that set
+    # and supervise the rupiah are material even when no "dollar" is mentioned
+    - "bank indonesia"
+    - "ojk"                       # Otoritas Jasa Keuangan, financial regulator
+    - "asean"
+
+# -----------------------------------------------------------------------------
+# 6. STAGE-0 SOURCE GATE
+# Rationale (report §4.1): GDELT indexes content farms that republish a single
+# wire story hundreds of times. Without a source gate, our "news volume" feature
+# measures syndication reach, not event importance.
+# `allowlist_mode: soft` keeps non-listed domains but tags tier=3 so we can
+# ablate the decision in Task 2 instead of losing the data irreversibly.
+# -----------------------------------------------------------------------------
+source_gate:
+  allowlist_mode: soft          # soft | hard
+  tier1_wires:                  # primary newswires — fastest, most market-moving
+    [reuters.com, apnews.com, bloomberg.com, afp.com, dowjones.com,
+     ft.com, wsj.com, cnbc.com, marketwatch.com, economist.com]
+  tier2_quality:                # quality general / regional press
+    [bbc.co.uk, bbc.com, aljazeera.com, theguardian.com, nytimes.com,
+     washingtonpost.com, scmp.com, nikkei.com, straitstimes.com,
+     jakartapost.com, thehindu.com, timesofindia.indiatimes.com,
+     dw.com, france24.com, politico.com, axios.com, cnn.com,
+     foreignpolicy.com, defensenews.com, spglobal.com, tass.com,
+     rt.com, xinhuanet.com, globaltimes.cn, presstv.ir]
+    # NOTE: state-affiliated outlets (tass, rt, xinhua, globaltimes, presstv)
+    # are deliberately INCLUDED and flagged `state_affiliated=True`.
+    # They are propaganda, but propaganda is itself a geopolitical signal and
+    # excluding them would give us only the Western framing of every event.
+  state_affiliated:
+    [tass.com, rt.com, xinhuanet.com, globaltimes.cn, presstv.ir, sputniknews.com]
+  blocklist_patterns:           # SEO farms, aggregators, dead mirrors
+    ["msn.com", "news.google.com", "yahoo.com", "finanzen.net",
+     "investing.com/news", "menafn.com", "zerohedge.com", "*.blogspot.*",
+     "*.wordpress.com", "newsbreak.com", "*.tumblr.com"]
+
+# -----------------------------------------------------------------------------
+# 7. DEDUPLICATION
+# Three levels. `dup_count` is retained as a FEATURE (syndication breadth is a
+# proxy for perceived importance) rather than discarded. Report §4.4.
+# -----------------------------------------------------------------------------
+dedup:
+  simhash_bits: 64
+  shingle_size: 4               # character 4-grams of the normalised title
+  hamming_threshold: 6          # <=6/64 bit difference => near-duplicate
+  window_hours: 48              # only compare within +/-48h (events are local in time)
+  keep: earliest                # first publisher wins; first-mover timing matters
+
+# -----------------------------------------------------------------------------
+# 8. TEMPORAL ALIGNMENT — the single most common fatal error in this kind of
+# study. Report §5.
+# Day-level rule in WIB: news from WIB calendar day D is paired with the first
+# JISDOR fix strictly after D (details in the block below and src/align.py).
+# -----------------------------------------------------------------------------
+alignment:
+  # Day-level rule in WIB (full argument in src/align.py): convert GDELT's UTC
+  # timestamp to WIB FIRST, then take the calendar date D. News from D is
+  # paired with the first JISDOR fix strictly after D; weekend/holiday news
+  # joins the preceding trading day's bucket and rolls to that same next fix.
+  # No intraday cutoff is needed, so it does not matter that BI's fixing time
+  # was not constant over the period. Implemented as: bucket on the last trading day <= D,
+  # then shift every bucket forward `predict_lag_days` trading days.
+  predict_lag_days: 1
+  weekend_policy: accumulate    # Fri+Sat+Sun news -> one bucket -> Monday's fix
+  # Keep exactly-unchanged prints. That guard was built for a many-decimal
+  # index, where an identical value really does mean a stale quote. JISDOR is
+  # quoted in whole rupiah, so two identical consecutive fixes happen by
+  # chance (13 of 1,202 in 2021-2026). Dropping them would punch holes in the
+  # target for no gain.
+  drop_zero_return_days: false
+
+# -----------------------------------------------------------------------------
+# 9. TEXT PREPROCESSING — TWO TRACKS, ONE CORPUS
+# Report §6. The core argument: preprocessing is model-dependent.
+# Track A feeds sparse/count models. Track B feeds transformers, which learn
+# from casing and function words that Track A destroys.
+# -----------------------------------------------------------------------------
+preprocess:
+  track_a:                      # TF-IDF / LDA / VADER / classical ML
+    unicode_fix: true
+    strip_outlet_suffix: true   # " - Reuters", " | Al Jazeera"
+    lowercase: true
+    remove_urls: true
+    expand_contractions: true
+    remove_stopwords: true
+    lemmatize: true
+    number_placeholder: true    # 4.5% -> <PCT> ; 2,300 -> <NUM>
+    min_tokens: 3
+    detect_bigrams: true        # federal_reserve, trade_war, interest_rate
+    # CRITICAL: these are never removed as stopwords. Dropping "not" turns
+    # "Fed will not cut rates" into "fed cut rates" and flips the sentiment.
+    stopword_keeplist:
+      [not, no, nor, never, none, cannot, without, against, down, up, over,
+       under, above, below, off, out, more, less, few, most, very, too]
+  track_b:                      # FinBERT / DeBERTa / mBERT
+    unicode_fix: true
+    strip_outlet_suffix: true
+    lowercase: false            # casing carries entity information
+    remove_stopwords: false     # attention needs function words
+    lemmatize: false            # subword tokenisers handle morphology
+    max_tokens: 128             # headlines are short; 128 covers >99.5%
+
+# Surface-form normalisation applied to BOTH tracks before anything else,
+# so "U.S.", "US", "United States" and "Washington" become one entity.
+entity_aliases:
+  UNITED_STATES: ["u.s.", "u.s", "us", "usa", "united states", "america",
+                  "washington", "white house", "biden administration",
+                  "trump administration"]
+  CHINA:         ["china", "prc", "beijing", "chinese government"]
+  RUSSIA:        ["russia", "moscow", "kremlin", "russian federation"]
+  EUROZONE:      ["eu", "european union", "brussels", "eurozone", "euro area"]
+  FED:           ["fed", "federal reserve", "fomc", "us central bank"]
+  ECB:           ["ecb", "european central bank"]
+
+# -----------------------------------------------------------------------------
+# 10. HUMAN AUDIT LOOP — the evidence that our filter is human-reasoned.
+# Report §4.5. Two annotators independently label a stratified sample.
+# The filter is only accepted if it clears both thresholds.
+# -----------------------------------------------------------------------------
+audit:
+  sample_size: 300
+  stratify_by: [year, theme_family]
+  n_annotators: 2
+  accept_precision: 0.85
+  accept_kappa: 0.60            # Cohen's kappa, "substantial agreement"
+
+# -----------------------------------------------------------------------------
+# 11. OUTPUT LAYOUT
+# -----------------------------------------------------------------------------
+paths:
+  cache:     data/cache
+  raw:       data/raw
+  interim:   data/interim
+  processed: data/processed
+  reports:   reports

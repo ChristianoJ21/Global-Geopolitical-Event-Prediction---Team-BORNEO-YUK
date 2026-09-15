@@ -1,0 +1,26 @@
+{
+  "generated_utc": "2026-09-15T16:05:58+00:00",
+  "offline_synthetic": false,
+  "period": {
+    "start": "2021-09-01",
+    "end": "2026-09-01"
+  },
+  "stride_days": 1,
+  "sub_day_chunks": 1,
+  "news_source": "gkg",
+  "families": [
+    "conflict",
+    "sanctions_trade",
+    "diplomacy",
+    "energy",
+    "monetary_policy",
+    "political_risk"
+  ],
+  "n_articles_raw": 1896380,
+  "n_articles_kept": 905713,
+  "n_trading_days": 1202,
+  "n_dataset_rows": 1202,
+  "n_features": 53,
+  "leakage_problems": [],
+  "seed": 42
+}
