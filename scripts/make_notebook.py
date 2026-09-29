@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate notebooks/task1_data_acquisition.ipynb.
+"""Generate notebook/task1/task1_data_acquisition.ipynb.
 
 The notebook is generated rather than hand-edited so that its narrative stays
 in sync with the modules, and so that code review happens on a readable .py
@@ -13,7 +13,7 @@ from pathlib import Path
 import nbformat as nbf
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "notebooks" / "task1_data_acquisition.ipynb"
+OUT = ROOT / "notebook" / "task1" / "task1_data_acquisition.ipynb"
 
 nb = nbf.v4.new_notebook()
 C: list = []
@@ -65,7 +65,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-ROOT = Path.cwd().parent if Path.cwd().name == "notebooks" else Path.cwd()
+ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / "config" / "config.yaml").exists())
 sys.path.insert(0, str(ROOT))
 
 from src.config import load_config

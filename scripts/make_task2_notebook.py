@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Generate notebook/task2_eda_and_baselines.ipynb.
+"""Generate notebook/task2/task2_eda_and_baselines.ipynb.
 
     py scripts/make_task2_notebook.py
-    py -m jupyter nbconvert --to notebook --execute --inplace notebook/task2_eda_and_baselines.ipynb
+    python -m jupyter nbconvert --to notebook --execute --inplace notebook/task2/task2_eda_and_baselines.ipynb
 
 Generated rather than hand-edited (same reason as scripts/make_notebook.py):
 review happens on this readable file, and the notebook only READS what
-``py -m src.run_task2`` wrote, so it cannot drift from the pipeline's numbers.
+``python -m src.run_task2`` wrote, so it cannot drift from the pipeline's numbers.
 """
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from pathlib import Path
 import nbformat as nbf
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "notebook" / "task2_eda_and_baselines.ipynb"
+OUT = ROOT / "notebook" / "task2" / "task2_eda_and_baselines.ipynb"
 
 nb = nbf.v4.new_notebook()
 C: list = []
@@ -28,7 +28,7 @@ md(r"""
 
 **Hypothesis:** global geopolitical news helps predict the USD/IDR exchange rate (Bank Indonesia's JISDOR fix).
 
-This notebook is the exploratory analysis and the first experimental results. It reads only what `py -m src.run_task2` produced, so every number here is the pipeline's own.
+This notebook is the exploratory analysis and the first experimental results. It reads only what `python -m src.run_task2` produced, so every number here is the pipeline's own.
 
 | § | Content |
 |---|---|
@@ -48,7 +48,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-ROOT = Path.cwd().parent if Path.cwd().name == "notebook" else Path.cwd()
+ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / "config" / "config.yaml").exists())
 SPLITS, REP = ROOT / "data" / "splits", ROOT / "reports" / "task2"
 pd.set_option("display.width", 160); pd.set_option("display.max_colwidth", 90)
 plt.rcParams.update({"figure.figsize": (11, 3.6), "axes.grid": True, "grid.alpha": 0.3})
