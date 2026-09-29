@@ -269,6 +269,4 @@ Every random step is seeded from `project.random_seed`. Downloads are cached in 
 
 ---
 
-## AI-assistance disclosure
 
-As the project rules allow, AI assistance was used for coding and debugging. The design decisions were made by the team: target and source, the filtering scope, the alignment rule, the preprocessing tracks, and for Task 2 the target formulation, the feature extractors and the model set. They are justified in the team's reports and in the comments of `config/config.yaml`.
