@@ -1,0 +1,7 @@
+check,status,detail
+Corpus non-empty after filtering,PASS,"905,713 articles kept"
+News coverage of trading days >= 90%,PASS,99.1% of trading days
+"Target series usable (>1,000 obs)",PASS,"1,201 daily returns"
+No degenerate class (<5%),PASS,"UP 40%, FLAT 30%, DOWN 30%"
+Duplicate rate under control (<60%),PASS,30.3% flagged duplicate
+No leakage assertion failures,PASS,all checks passed

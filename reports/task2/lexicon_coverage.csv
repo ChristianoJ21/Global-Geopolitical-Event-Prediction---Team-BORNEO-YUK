@@ -1,0 +1,11 @@
+measure,value
+headlines,905713.0
+vader_nonzero_share,0.6346469577007285
+vader_negative_share,0.34605774676967205
+vader_positive_share,0.27793462167375316
+lm_any_hit_share,0.46097384049914264
+lm_negative_hit_share,0.312699497522946
+lm_positive_hit_share,0.09552584538369219
+lm_uncertainty_hit_share,0.057708126084090657
+lm_litigious_hit_share,0.09407395057816328
+lm_constraining_hit_share,0.017297974082297593

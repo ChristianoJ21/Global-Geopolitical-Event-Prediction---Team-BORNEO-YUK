@@ -1,0 +1,54 @@
+column,group,dtype,non_null_%,mean,std
+n_articles,volume,float64,100.0,753.505,526.0343
+n_clusters,volume,float64,100.0,753.505,526.0343
+log_n_articles,volume,float64,100.0,6.4378,0.7798
+window_hours,calendar,float64,99.1,36.4937,26.1545
+articles_per_24h,volume,float64,100.0,510.1023,95.1082
+is_post_weekend,calendar,float64,99.1,0.2326,0.4227
+vol_z30,volume (relative),float64,98.3,0.0093,1.0396
+vol_z90,volume (relative),float64,98.3,0.0218,1.0366
+syndication_mean,syndication breadth,float64,99.1,1.5033,0.1133
+syndication_max,syndication breadth,float64,99.1,21.0042,18.459
+syndication_p90,syndication breadth,float64,99.1,2.225,0.414
+share_tier1,source composition,float64,99.1,0.0059,0.0058
+share_tier2,source composition,float64,99.1,0.0256,0.0104
+share_tier3,source composition,float64,99.1,0.9685,0.0128
+share_state_media,source composition,float64,99.1,0.0024,0.0034
+share_conflict,theme/materiality share,float64,99.1,0.3071,0.0373
+z_conflict,theme intensity (relative),float64,98.3,0.0309,1.1492
+share_diplomacy,theme/materiality share,float64,99.1,0.209,0.0265
+z_diplomacy,theme intensity (relative),float64,98.3,0.041,1.2192
+share_energy,theme/materiality share,float64,99.1,0.1173,0.0314
+z_energy,theme intensity (relative),float64,98.3,0.0625,1.3123
+share_monetary_policy,theme/materiality share,float64,99.1,0.1377,0.0356
+z_monetary_policy,theme intensity (relative),float64,98.3,0.0511,1.2934
+share_political_risk,theme/materiality share,float64,99.1,0.2086,0.0225
+z_political_risk,theme intensity (relative),float64,98.3,0.0372,1.1796
+share_sanctions_trade,theme/materiality share,float64,99.1,0.0203,0.0231
+z_sanctions_trade,theme intensity (relative),float64,98.3,0.0846,1.3928
+theme_entropy,concentration,float64,99.1,1.598,0.0487
+geo_entropy,geographic concentration,float64,99.1,2.1621,0.1471
+geo_hhi,geographic concentration,float64,99.1,0.2293,0.0457
+n_countries,volume,float64,100.0,30.827,5.4022
+share_market_term,theme/materiality share,float64,99.1,0.0299,0.013
+share_institution,theme/materiality share,float64,99.1,0.016,0.0122
+share_actor_country,theme/materiality share,float64,99.1,0.9889,0.006
+mean_headline_len,lexical,float64,99.1,10.8876,0.3356
+gdelt_tone_conflict,GDELT tone,float64,99.0,-2.5456,0.2454
+gdelt_tone_diplomacy,GDELT tone,float64,99.0,-1.2026,0.4631
+gdelt_tone_energy,GDELT tone,float64,99.0,-1.1221,0.6813
+gdelt_tone_monetary_policy,GDELT tone,float64,99.0,-0.9815,0.4859
+gdelt_tone_political_risk,GDELT tone,float64,99.0,-2.0663,0.4148
+gdelt_tone_sanctions_trade,GDELT tone,float64,99.0,0.1795,1.3413
+gdelt_volume_conflict,GDELT uncapped volume,float64,99.0,547.8635,96.0164
+gdelt_volume_diplomacy,GDELT uncapped volume,float64,99.0,71.6576,18.0721
+gdelt_volume_energy,GDELT uncapped volume,float64,99.0,39.4527,16.075
+gdelt_volume_monetary_policy,GDELT uncapped volume,float64,99.0,60.8513,20.4263
+gdelt_volume_political_risk,GDELT uncapped volume,float64,99.0,185.0064,51.4917
+gdelt_volume_sanctions_trade,GDELT uncapped volume,float64,99.0,5.2964,6.5928
+gdelt_volume_conflict_z30,GDELT uncapped volume,float64,98.2,-0.0639,1.107
+gdelt_volume_diplomacy_z30,GDELT uncapped volume,float64,98.2,-0.0023,1.1616
+gdelt_volume_energy_z30,GDELT uncapped volume,float64,98.2,-0.02,1.2374
+gdelt_volume_monetary_policy_z30,GDELT uncapped volume,float64,98.2,0.0136,1.105
+gdelt_volume_political_risk_z30,GDELT uncapped volume,float64,98.2,0.0227,1.1927
+gdelt_volume_sanctions_trade_z30,GDELT uncapped volume,float64,98.2,0.0545,1.2726

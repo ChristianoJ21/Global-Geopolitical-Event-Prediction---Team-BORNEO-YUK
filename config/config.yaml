@@ -3,7 +3,7 @@
 # Project: Predicting Global Geopolitical Events — Impact on the USD Exchange Rate
 #
 # EVERY value in this file is a DESIGN DECISION made by the team, not a default.
-# The rationale for each block is in the comments below and in the team's report.
+# The rationale for each block is documented in docs/TASK1_REPORT.md §3-§6.
 # Changing a value here changes the pipeline; nothing is hard-coded in src/.
 # =============================================================================
 
@@ -384,3 +384,72 @@ paths:
   interim:   data/interim
   processed: data/processed
   reports:   reports
+
+# -----------------------------------------------------------------------------
+# 12. TASK 2 — NLP FEATURES, BASELINES, EVALUATION
+# Team decisions (27 Sep 2026):
+#   * primary target  = y_direction (UP / FLAT / DOWN, 10 bp dead-zone from §2),
+#                       scored by macro-F1; secondary = y_return (regression),
+#                       scored by RMSE / MAE.
+#   * text features   = VADER + Loughran-McDonald + TF-IDF -> SVD, on headlines.
+#                       The brief forbids pre-trained embeddings and transformers.
+#   * models          = naive + ARIMA (price only); logistic regression / ridge
+#                       and XGBoost, each run price-only AND price+NLP so the
+#                       only difference between baseline and combined is news.
+# Anything FITTED on text (TF-IDF vocabulary, IDF, SVD axes) is fitted on
+# training-period news only. Hyperparameters are chosen on validation; test is
+# scored once, after refitting on train+validation.
+# -----------------------------------------------------------------------------
+task2:
+  # A story copied 200 times counts more than one copied twice, but not 100x
+  # more: each article is weighted by log1p(dup_count) in every daily average.
+  weight_by_syndication: true
+  vader:
+    text_col: text_track_b        # VADER's rules read case, "!" and "not": Track B keeps them
+    neg_threshold: -0.05          # the VADER authors' standard cut-offs
+    pos_threshold: 0.05
+  loughran_mcdonald:
+    path: data/lexicons/loughran_mcdonald_2014.csv
+    text_col: text_track_a        # lowercased lemmas match dictionary entries
+    categories: [negative, positive, uncertainty, litigious, constraining]
+  tfidf:
+    text_col: text_track_a
+    ngram_range: [1, 2]           # "rate hike", "trade war" carry meaning as pairs
+    min_df: 50                    # a term must appear in 50+ training headlines
+    max_df: 0.5                   # drop terms in more than half of all headlines
+    max_features: 20000
+    sublinear_tf: true
+    svd_components: 20            # 727 training days cannot support 20,000 columns
+  # Sentiment levels drift with the news cycle; a trailing z-score asks
+  # "is today unusually negative for this period?" (same idea as Task 1 §9).
+  zscore_window: 30
+  zscore_columns: [nlp_vader_mean, nlp_lm_negative_rate, nlp_lm_uncertainty_rate]
+  price:
+    return_lags: [1, 2, 3, 4, 5]
+    rolling_windows: [5, 20]
+  market_controls: [lag1_ret_DXY, lag1_ret_BRENT, lag1_lvl_VIX, lag1_chg_VIX]
+  # Feature groups per experiment. "price" is the brief's baseline (2b),
+  # "price+nlp" the combined model (2c); the rest are ablations that show
+  # whether news adds anything beyond market controls and Task 1's aggregates.
+  feature_sets:
+    price: [price]
+    price+nlp: [price, nlp]
+    price+market: [price, market]
+    price+market+nlp: [price, market, nlp]
+    price+task1_news: [price, task1_news]
+    all: [price, market, task1_news, nlp]
+  arima:
+    max_p: 2
+    max_q: 2
+  grid:
+    logreg_C: [0.01, 0.1, 1.0]
+    ridge_alpha: [1.0, 10.0, 100.0]
+    xgb_max_depth: [2, 3]
+    xgb_n_estimators: [100, 300]
+    xgb_learning_rate: 0.05
+    xgb_subsample: 0.8
+    xgb_colsample_bytree: 0.8
+  paths:
+    splits: data/splits
+    reports: reports/task2
+    article_scores: data/interim/article_scores.parquet

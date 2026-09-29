@@ -1,0 +1,28 @@
+LABELLING GUIDELINES — read before starting, do not skip.
+
+Question for every row:
+  "Could a well-informed FX trader reading ONLY this headline reasonably
+   update their view on the US dollar over the next 1-5 trading days?"
+
+Label 1 (MATERIAL) if the headline involves any of:
+  - armed conflict, military escalation or de-escalation between states
+  - sanctions, tariffs, export controls, trade agreements or trade disputes
+  - central bank policy, interest rates, inflation, currency or reserves
+  - energy supply disruption, OPEC decisions, major commodity shocks
+  - political instability in a G20 / major-trade economy (coup, snap election,
+    government collapse, debt crisis, capital controls)
+  - explicit currency-market commentary
+
+Label 0 (NOT MATERIAL) if it is:
+  - sport, entertainment, celebrity, lifestyle, weather (unless it is a supply
+    shock of national scale)
+  - local crime or local politics with no national economic consequence
+  - corporate news with no macro or geopolitical dimension
+  - opinion pieces with no new fact
+  - a listicle, a horoscope, a product review, or obvious SEO filler
+
+Label ? if you genuinely cannot tell from the headline alone.
+
+IMPORTANT: judge ONLY the headline text. Do not open the URL, and do not use
+hindsight about what the dollar actually did. Both would contaminate the audit.
+Do not discuss rows with the other annotator until both sheets are finished.

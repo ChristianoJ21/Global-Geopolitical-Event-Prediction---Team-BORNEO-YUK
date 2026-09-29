@@ -1,0 +1,85 @@
+task,model,feature_set,params,val_score
+cls,logreg,price,"{""C"": 0.01}",0.39257725160479323
+cls,logreg,price,"{""C"": 0.1}",0.4034129993826616
+cls,logreg,price,"{""C"": 1.0}",0.39758186732069206
+cls,logreg,price+nlp,"{""C"": 0.01}",0.397895578269426
+cls,logreg,price+nlp,"{""C"": 0.1}",0.39361737436580607
+cls,logreg,price+nlp,"{""C"": 1.0}",0.37228051020466185
+cls,logreg,price+market,"{""C"": 0.01}",0.43425545928965903
+cls,logreg,price+market,"{""C"": 0.1}",0.43948303064212874
+cls,logreg,price+market,"{""C"": 1.0}",0.4254743705983746
+cls,logreg,price+market+nlp,"{""C"": 0.01}",0.47822664530094744
+cls,logreg,price+market+nlp,"{""C"": 0.1}",0.5041958361360938
+cls,logreg,price+market+nlp,"{""C"": 1.0}",0.5086240311880393
+cls,logreg,price+task1_news,"{""C"": 0.01}",0.3052818149592343
+cls,logreg,price+task1_news,"{""C"": 0.1}",0.33877834614569485
+cls,logreg,price+task1_news,"{""C"": 1.0}",0.35371254516756023
+cls,logreg,all,"{""C"": 0.01}",0.4066845165111061
+cls,logreg,all,"{""C"": 0.1}",0.4461935325590876
+cls,logreg,all,"{""C"": 1.0}",0.41661706414818145
+cls,xgb,price,"{""max_depth"": 2, ""n_estimators"": 100}",0.353878918445782
+cls,xgb,price,"{""max_depth"": 2, ""n_estimators"": 300}",0.3760724013471266
+cls,xgb,price,"{""max_depth"": 3, ""n_estimators"": 100}",0.35513012407422345
+cls,xgb,price,"{""max_depth"": 3, ""n_estimators"": 300}",0.3305842656108528
+cls,xgb,price+nlp,"{""max_depth"": 2, ""n_estimators"": 100}",0.3824213780171472
+cls,xgb,price+nlp,"{""max_depth"": 2, ""n_estimators"": 300}",0.38452703351579753
+cls,xgb,price+nlp,"{""max_depth"": 3, ""n_estimators"": 100}",0.37516377342464297
+cls,xgb,price+nlp,"{""max_depth"": 3, ""n_estimators"": 300}",0.3730436378911499
+cls,xgb,price+market,"{""max_depth"": 2, ""n_estimators"": 100}",0.42517975851309187
+cls,xgb,price+market,"{""max_depth"": 2, ""n_estimators"": 300}",0.43813846608877666
+cls,xgb,price+market,"{""max_depth"": 3, ""n_estimators"": 100}",0.42381613775619353
+cls,xgb,price+market,"{""max_depth"": 3, ""n_estimators"": 300}",0.4411892313927221
+cls,xgb,price+market+nlp,"{""max_depth"": 2, ""n_estimators"": 100}",0.4607263335441703
+cls,xgb,price+market+nlp,"{""max_depth"": 2, ""n_estimators"": 300}",0.49267496069821654
+cls,xgb,price+market+nlp,"{""max_depth"": 3, ""n_estimators"": 100}",0.44769805007168156
+cls,xgb,price+market+nlp,"{""max_depth"": 3, ""n_estimators"": 300}",0.4714906105356543
+cls,xgb,price+task1_news,"{""max_depth"": 2, ""n_estimators"": 100}",0.33698148486880886
+cls,xgb,price+task1_news,"{""max_depth"": 2, ""n_estimators"": 300}",0.3429429429429429
+cls,xgb,price+task1_news,"{""max_depth"": 3, ""n_estimators"": 100}",0.33782081621447224
+cls,xgb,price+task1_news,"{""max_depth"": 3, ""n_estimators"": 300}",0.3425678843400362
+cls,xgb,all,"{""max_depth"": 2, ""n_estimators"": 100}",0.43900385893511634
+cls,xgb,all,"{""max_depth"": 2, ""n_estimators"": 300}",0.48592132505175983
+cls,xgb,all,"{""max_depth"": 3, ""n_estimators"": 100}",0.4425255716724911
+cls,xgb,all,"{""max_depth"": 3, ""n_estimators"": 300}",0.4830389490811036
+reg,ridge,price,"{""alpha"": 1.0}",-0.3792283678786154
+reg,ridge,price,"{""alpha"": 10.0}",-0.3792015677882097
+reg,ridge,price,"{""alpha"": 100.0}",-0.37915158262946963
+reg,ridge,price+nlp,"{""alpha"": 1.0}",-0.3882166442207527
+reg,ridge,price+nlp,"{""alpha"": 10.0}",-0.38632502097106114
+reg,ridge,price+nlp,"{""alpha"": 100.0}",-0.383195640269522
+reg,ridge,price+market,"{""alpha"": 1.0}",-0.35235377244468924
+reg,ridge,price+market,"{""alpha"": 10.0}",-0.352302895769872
+reg,ridge,price+market,"{""alpha"": 100.0}",-0.3522485574575066
+reg,ridge,price+market+nlp,"{""alpha"": 1.0}",-0.3574830848920681
+reg,ridge,price+market+nlp,"{""alpha"": 10.0}",-0.35597684190875506
+reg,ridge,price+market+nlp,"{""alpha"": 100.0}",-0.354116986474416
+reg,ridge,price+task1_news,"{""alpha"": 1.0}",-0.6645052270984613
+reg,ridge,price+task1_news,"{""alpha"": 10.0}",-0.4203262621986019
+reg,ridge,price+task1_news,"{""alpha"": 100.0}",-0.38853341427428706
+reg,ridge,all,"{""alpha"": 1.0}",-0.661995872412945
+reg,ridge,all,"{""alpha"": 10.0}",-0.3991876135754344
+reg,ridge,all,"{""alpha"": 100.0}",-0.36561990925933074
+reg,xgb,price,"{""max_depth"": 2, ""n_estimators"": 100}",-0.37859483229723023
+reg,xgb,price,"{""max_depth"": 2, ""n_estimators"": 300}",-0.38212948415465886
+reg,xgb,price,"{""max_depth"": 3, ""n_estimators"": 100}",-0.3780655467302677
+reg,xgb,price,"{""max_depth"": 3, ""n_estimators"": 300}",-0.38728780715561995
+reg,xgb,price+nlp,"{""max_depth"": 2, ""n_estimators"": 100}",-0.38240930151776126
+reg,xgb,price+nlp,"{""max_depth"": 2, ""n_estimators"": 300}",-0.3950601815731657
+reg,xgb,price+nlp,"{""max_depth"": 3, ""n_estimators"": 100}",-0.389289542238255
+reg,xgb,price+nlp,"{""max_depth"": 3, ""n_estimators"": 300}",-0.4080342460555868
+reg,xgb,price+market,"{""max_depth"": 2, ""n_estimators"": 100}",-0.35705190612933646
+reg,xgb,price+market,"{""max_depth"": 2, ""n_estimators"": 300}",-0.3552572771430087
+reg,xgb,price+market,"{""max_depth"": 3, ""n_estimators"": 100}",-0.35441973083500034
+reg,xgb,price+market,"{""max_depth"": 3, ""n_estimators"": 300}",-0.3596871885995386
+reg,xgb,price+market+nlp,"{""max_depth"": 2, ""n_estimators"": 100}",-0.36309225990751687
+reg,xgb,price+market+nlp,"{""max_depth"": 2, ""n_estimators"": 300}",-0.36643338938516795
+reg,xgb,price+market+nlp,"{""max_depth"": 3, ""n_estimators"": 100}",-0.35849920033219884
+reg,xgb,price+market+nlp,"{""max_depth"": 3, ""n_estimators"": 300}",-0.3629390042361779
+reg,xgb,price+task1_news,"{""max_depth"": 2, ""n_estimators"": 100}",-0.37343754624856146
+reg,xgb,price+task1_news,"{""max_depth"": 2, ""n_estimators"": 300}",-0.38443446796432695
+reg,xgb,price+task1_news,"{""max_depth"": 3, ""n_estimators"": 100}",-0.37719177315254254
+reg,xgb,price+task1_news,"{""max_depth"": 3, ""n_estimators"": 300}",-0.3894893099646004
+reg,xgb,all,"{""max_depth"": 2, ""n_estimators"": 100}",-0.353941051611318
+reg,xgb,all,"{""max_depth"": 2, ""n_estimators"": 300}",-0.35563142365769856
+reg,xgb,all,"{""max_depth"": 3, ""n_estimators"": 100}",-0.362181679635275
+reg,xgb,all,"{""max_depth"": 3, ""n_estimators"": 300}",-0.3701678377895426

@@ -1,0 +1,10 @@
+check,value,pct_of_total
+total rows fetched,1896380,100.0
+unique URLs,1590042,83.85
+flagged duplicate,574241,30.28
+missing/blank title,0,0.0
+non-English language tag,0,
+empty after Track-A preprocessing,27473,1.45
+survived the full funnel,905713,47.76
+distinct domains,16497,
+distinct source countries,246,

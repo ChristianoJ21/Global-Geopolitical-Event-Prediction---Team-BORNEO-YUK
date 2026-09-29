@@ -1,0 +1,27 @@
+{
+  "generated_utc": "2026-09-26T18:37:53+00:00",
+  "rows": {
+    "train": 726,
+    "val": 235,
+    "test": 240
+  },
+  "feature_groups": {
+    "price": 10,
+    "market": 4,
+    "task1_news": 53,
+    "nlp": 46
+  },
+  "tfidf": {
+    "fit_before": "2024-08-30",
+    "n_fit_articles": 539429,
+    "vocabulary_size": 13532,
+    "svd_explained_variance": 0.20580966372934956
+  },
+  "arima_order": [
+    2,
+    0,
+    2
+  ],
+  "leakage_problems": [],
+  "seed": 42
+}

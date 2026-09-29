@@ -1,0 +1,8 @@
+check,value,status
+observations,1201.0,OK
+exact-zero returns,13.0,CHECK: stale quotes
+|return| > 5 sigma,2.0,OK
+|return| > 3% in a day,0.0,OK
+excess kurtosis,3.01,expected (FX is fat-tailed)
+lag-1 autocorrelation,0.0969,OK: near-zero as theory predicts
+lag-1 autocorr of |r|,0.1459,expected: volatility clusters

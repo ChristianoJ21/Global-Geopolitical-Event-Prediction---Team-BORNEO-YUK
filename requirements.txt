@@ -16,8 +16,14 @@ nltk>=3.8              # stopwords + WordNet lemmatizer (optional; see below)
 
 # analysis / reporting
 matplotlib>=3.7
-statsmodels>=0.14      # used from Task 2 onward (ADF, Granger, Newey-West)
+statsmodels>=0.14      # ARIMA baseline (Task 2); ADF, Granger, Newey-West (Task 4)
 tqdm>=4.66
+
+# Task 2 — classical NLP features and baseline models
+scikit-learn>=1.4      # TF-IDF, TruncatedSVD, logistic regression, ridge, metrics
+xgboost>=2.0           # gradient-boosted trees (price-only and price+NLP)
+scipy>=1.11            # sparse matrices for the daily TF-IDF centroids
+nbformat>=5.9          # builds the Task 2 notebook
 
 # testing
 pytest>=7.4
@@ -26,9 +32,9 @@ pytest>=7.4
 # One-time NLTK corpora download (Track A only; the pipeline degrades
 # gracefully to a bundled stopword list and a suffix lemmatizer without them):
 #
-#   python -m nltk.downloader stopwords wordnet omw-1.4
+#   python -m nltk.downloader stopwords wordnet omw-1.4 vader_lexicon
 #
-# Task 2 will add: scikit-learn, transformers, torch, sentencepiece.
-# They are deliberately NOT required for Task 1 — acquisition should run on a
-# laptop with no GPU and no multi-gigabyte model download.
+# vader_lexicon is required from Task 2 on. The Task 2 brief forbids
+# pre-trained embeddings and transformers, so there is no torch /
+# transformers dependency: everything runs on a laptop CPU.
 # ---------------------------------------------------------------------------

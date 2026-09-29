@@ -1,0 +1,6 @@
+stage,removed,surviving,pct_of_raw
+0. Retrieved from GDELT (post-thematic query),1896380,1896380,100.0
+0a. minus blocklisted domains,70869,1825511,96.26293253461859
+0b. minus source-gate rejects,70869,1825511,96.26293253461859
+2. minus non-material,462864,1362647,71.85516615868127
+3. minus duplicates,456934,905713,47.76010082367458
