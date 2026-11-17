@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.DS_Store
+
+# Generated / too large for GitHub — see README "What gets built" for the
+# full list. `python -m src.build_dataset`, `run_task2` and `run_task3`
+# regenerate all of it (Task 3 embeddings ~2.5 GB live in data/interim/).
+data/cache/
+data/interim/
+data/raw/articles_raw.parquet
+reports/task3/*.log

@@ -1,0 +1,3 @@
+block,k,model,params,val_macro_f1
+finbert_sent,,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4648067510247939
+finbert_sent,,logreg,"{""C"": 0.01}",0.4559851100551946

@@ -453,3 +453,55 @@ task2:
     splits: data/splits
     reports: reports/task2
     article_scores: data/interim/article_scores.parquet
+
+# -----------------------------------------------------------------------------
+# 13. TASK 3 — EMBEDDINGS, MULTIMODAL FUSION, ABLATION
+# Pre-trained encoders are allowed from Task 3 on. Everything that is FITTED
+# (PPMI word vectors, PCA axes, topic centroids, fine-tuned weights) still sees
+# training-period news only, and the Task 2 protocol is unchanged: choose on
+# validation, refit on train+validation, score test once.
+# -----------------------------------------------------------------------------
+task3:
+  # Headline -> vector. See src/text_embeddings.py for why these four.
+  encoders: [glove, ppmi, minilm, finbert]
+  # Every encoder reads the same corpus: the 100 most-syndicated headlines of
+  # each news day (119,100 headlines, 22.6% of the syndication-weighted news).
+  # FinBERT on all 905k headlines was not reliable on an 8 GB laptop.
+  corpus_top_k_per_day: 100
+  # A daily mean of 768-d vectors is still 768 columns for 726 training days.
+  # PCA (fitted on training days) keeps the main directions only.
+  pca_components: 16
+  # Temporal aggregation of headline vectors into one vector per day.
+  pooling:
+    decay_halflife_days: 3        # exponential decay: yesterday's news still counts, a bit less
+    attention_temperature: 0.25   # salience attention: sharper = fewer headlines dominate
+  topics:
+    n_topics: 20                  # BERTopic-style: MiniLM vectors -> k-means -> c-TF-IDF labels
+    fit_sample: 200000            # training-period headlines used to fit the centroids
+  ner:
+    top_k_per_day: 50             # NER runs on the 50 most-syndicated headlines of each day
+  finetune:
+    top_k_per_day: 32
+    epochs: 1
+    learning_rate: 2.0e-5
+    batch_size: 64
+  attention_net:
+    top_k_per_day: 64             # headlines per day the attention network can look at
+    hidden: 32
+    dropout: 0.3
+    weight_decay: 1.0e-3
+    max_epochs: 60
+    patience: 10
+  seeds: [42, 123, 2024]          # stochastic models are reported as mean +- std over these
+  late_fusion_weights: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+  tuning:                         # wider grid for the best architecture (Task 3, 3a)
+    logreg_C: [0.003, 0.01, 0.03, 0.1, 0.3, 1.0]
+    pca_components: [4, 8, 16, 32]
+    xgb_max_depth: [2, 3, 4]
+    xgb_n_estimators: [100, 300, 600]
+    xgb_learning_rate: [0.02, 0.05]
+    xgb_min_child_weight: [1, 5]
+  paths:
+    splits: data/splits/task3
+    reports: reports/task3
+    figures: reports/task3/figures

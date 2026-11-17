@@ -1,0 +1,75 @@
+{
+  "generated_utc": "2026-11-17T01:27:45+00:00",
+  "rows": {
+    "train": 726,
+    "val": 235,
+    "test": 240
+  },
+  "n_headlines": 119100,
+  "n_headlines_total": 905713,
+  "fit_before": "2024-08-30",
+  "encoders": {
+    "glove": "sentence-transformers/average_word_embeddings_glove.6B.300d",
+    "ppmi": "PPMI-SVD trained on our headlines",
+    "minilm": "sentence-transformers/all-MiniLM-L6-v2",
+    "finbert": "ProsusAI/finbert"
+  },
+  "feature_groups": {
+    "price": 10,
+    "market": 4,
+    "task1_news": 53,
+    "nlp": 46,
+    "emb_glove_mean": 16,
+    "emb_ppmi_mean": 16,
+    "emb_minilm_mean": 16,
+    "emb_minilm_decay": 16,
+    "emb_minilm_attention": 16,
+    "emb_finbert_mean": 16,
+    "emb_finbert_decay": 16,
+    "emb_finbert_attention": 16,
+    "finbert_sent": 13,
+    "topics": 40,
+    "entity": 16
+  },
+  "best_on_validation": {
+    "experiment": "A + finbert_sent",
+    "model": "xgb",
+    "val_macro_f1": 0.4648067510247939
+  },
+  "model_C": [
+    {
+      "model": "logreg",
+      "C_block": "finbert_sent",
+      "C_params": {
+        "C": 0.01
+      },
+      "val_macro_f1": 0.4559851100551946
+    },
+    {
+      "model": "xgb",
+      "C_block": "finbert_sent",
+      "C_params": {
+        "max_depth": 2,
+        "n_estimators": 300,
+        "learning_rate": 0.05,
+        "min_child_weight": 1
+      },
+      "val_macro_f1": 0.4648067510247939
+    }
+  ],
+  "ner_coverage": {
+    "us": 0.19738035264483628,
+    "fed": 0.014693534844668345,
+    "indonesia": 0.0014441645675902603,
+    "china": 0.03486146095717884,
+    "russia_ukraine": 0.07437447523089841,
+    "middle_east": 0.07429051217464315,
+    "central_banks": 0.018270361041141898,
+    "any": 0.3414273719563392
+  },
+  "seeds": [
+    42,
+    123,
+    2024
+  ]
+}

@@ -25,6 +25,12 @@ xgboost>=2.0           # gradient-boosted trees (price-only and price+NLP)
 scipy>=1.11            # sparse matrices for the daily TF-IDF centroids
 nbformat>=5.9          # builds the Task 2 notebook
 
+# Task 3 — pre-trained embeddings, transformers, multimodal fusion
+torch>=2.5             # FinBERT / MiniLM / NER inference, fine-tuning, attention-fusion network (MPS/CUDA/CPU)
+transformers>=4.45     # ProsusAI/finbert, dslim/bert-base-NER, MiniLM fine-tuning
+sentence-transformers>=3.0   # all-MiniLM-L6-v2 and GloVe 6B-300d encoders
+# macOS: xgboost needs OpenMP -> `brew install libomp`
+
 # testing
 pytest>=7.4
 
@@ -34,7 +40,8 @@ pytest>=7.4
 #
 #   python -m nltk.downloader stopwords wordnet omw-1.4 vader_lexicon
 #
-# vader_lexicon is required from Task 2 on. The Task 2 brief forbids
-# pre-trained embeddings and transformers, so there is no torch /
-# transformers dependency: everything runs on a laptop CPU.
+# vader_lexicon is required from Task 2 on. Task 2 used no pre-trained
+# models; Task 3 downloads four from the Hugging Face Hub on first run
+# (~1.5 GB, cached in ~/.cache/huggingface). Encoding all 905k headlines
+# takes ~1 h on an Apple M3 GPU, after which everything is cached.
 # ---------------------------------------------------------------------------

@@ -1,10 +1,11 @@
 # Predicting Global Geopolitical Events: Impact on the USD/IDR Exchange Rate
-### Task 1: Data Acquisition & Strategic Preprocessing · Task 2: Pipeline Proposal & Baseline Experimentation
+### Task 1: Data Acquisition & Strategic Preprocessing · Task 2: Pipeline Proposal & Baseline Experimentation · Task 3: Model Refinement & Multimodal Integration
 
 **Hypothesis under test.** Global geopolitical news carries significant information about, and is useful for predicting, fluctuations in the US dollar exchange rate, measured here as USD/IDR, Bank Indonesia's JISDOR reference rate.
 
 - **Task 1** builds the dataset that makes testing that hypothesis *possible*, and makes a false positive *hard*.
 - **Task 2** turns the headlines into numeric features, builds a baseline that only sees past exchange rates, builds a combined model that also sees the news, and compares them on a strict chronological split.
+- **Task 3** replaces the lexicons with pre-trained and transformer embeddings (GloVe, corpus-trained PPMI-SVD, MiniLM, FinBERT), adds topic, entity and temporal-pooling features, fuses text with the time series three ways (early, late, attention network), and runs the A / B / C ablation.
 
 Every design choice is recorded so it can be defended, ablated, or overturned.
 
@@ -28,7 +29,11 @@ python -m src.build_dataset
 # 2. Task 2: NLP features -> splits -> baselines -> combined models (~3 min)
 python -m src.run_task2
 
-# 3. Check the invariants (alignment, leakage, parsing, Task 2 timing): 35 tests
+# 3. Task 3: embeddings -> fusion -> ablation (~1 h the first time, then cached), then the analysis
+python -m src.run_task3
+python -m src.analysis_task3
+
+# 4. Check the invariants (alignment, leakage, parsing, Task 2 and Task 3 timing)
 python -m pytest tests/ -q
 ```
 
@@ -83,7 +88,20 @@ No API keys are required.
 | `notebook/task2/task2_eda_and_baselines.ipynb` | notebook | EDA and every result table, executed | yes |
 | `docs/task2_pipeline.png` | figure | the Task 2 pipeline diagram (`scripts/make_task2_diagram.py`) | yes |
 
-The files marked "no" and the `data/cache/` folder are not in the repo: GitHub rejects files over 100 MB. `python -m src.build_dataset` and `python -m src.run_task2` rebuild them.
+### Task 3
+
+| Output | Grain | Contents | On GitHub |
+|---|---|---|---|
+| **`data/splits/task3/train.csv`, `val.csv`, `test.csv`** | trading day | Task 2's table + every Task 3 text block (embedding PCA axes, FinBERT tone, topics, NER entities), lagged one day | yes |
+| `data/splits/task3/feature_groups.json` | column | which columns belong to which block | yes |
+| `data/processed/task3_text_daily.parquet` | news day | all Task 3 text features before the one-day shift | yes |
+| `data/interim/embeddings/` | headline | GloVe / PPMI-SVD / MiniLM / FinBERT vectors, FinBERT probabilities, NER, fine-tune cache (~2.5 GB) | no (rebuilt) |
+| `reports/task3/*.csv`, `manifest.json` | table | every experiment (results, tuning, late-fusion weights, ablation gains with bootstrap intervals, regression) and every analysis table | yes |
+| `reports/task3/figures/*.png` | figure | ablation, t-SNE, SHAP, error by regime | yes |
+| `notebooks/task3/task3_ablation_and_analysis.ipynb` | notebook | reproducible ablation, feature importance, error distributions, executed | yes |
+| `docs/task3_architecture.png`, `docs/Team BORNEO YUK - Task 3 ….pdf` | report | multimodal architecture diagram and the Task 3 report (5 pages) | yes |
+
+The files marked "no" and the `data/cache/` folder are not in the repo: GitHub rejects files over 100 MB. `python -m src.build_dataset`, `python -m src.run_task2` and `python -m src.run_task3` rebuild them.
 
 **Reading the article flags** (`articles_flagged_sample.csv`): `pass_source` = stage 0 (not a blocklisted aggregator); `theme_family` = stage 1; `has_actor_country` / `has_institution` / `has_market_term` are OR-ed into `pass_materiality` = stage 2; `is_duplicate`, `cluster_id`, `dup_count` = stage 3; `keep` = passed every stage (only these rows feed the features); `news_day` = the JISDOR trading day the article is grouped with; `text_track_a` / `text_track_b` = the two preprocessing tracks.
 
@@ -191,6 +209,33 @@ Headlines are averaged per trading day, weighted by `log1p(dup_count)`, with per
 Full tables are in `reports/task2/` and `notebook/task2/`.
 
 ---
+
+## Task 3: embeddings, multimodal fusion, ablation
+
+**Corpus.** All four encoders read the same 119,100 headlines: the 100 most-syndicated of each news day (22.6% of the copy-weighted news). FinBERT on all 905k headlines kept stalling on an 8 GB laptop, and one shared set keeps the comparison fair.
+
+**Representations** (`src/text_embeddings.py`, `src/text_features.py`, `src/entity_filter.py`):
+
+| | general-purpose | domain-specific |
+|---|---|---|
+| static | GloVe 6B-300d | PPMI-SVD word vectors trained on our 2021-24 headlines (Word2Vec's objective, Levy & Goldberg 2014) |
+| contextual | all-MiniLM-L6-v2 | FinBERT (ProsusAI): mean-pooled embedding + sentiment head |
+
+Beyond article sentiment: daily mean / exponential-decay / salience-attention pooling, BERTopic-style topics (MiniLM -> k-means 20 -> c-TF-IDF), NER entity filtering (BERT-NER -> US, Fed, Indonesia, China, Russia-Ukraine, Middle East, central banks), and a fine-tuned MiniLM. PCA (16 components), topic centroids and PPMI vectors are fitted on training news only, and every feature gets the same one-day shift as Tasks 1 and 2.
+
+**Fusion** (`src/fusion.py`): early (concatenate -> LogReg / XGBoost), late (log-linear blend of the time-series and text models, weight chosen on validation), and an attention fusion network (PyTorch: learned attention over the day's top-64 headline vectors + an MLP on the time series).
+
+**Ablation (test macro-F1; XGBoost = mean of 3 seeds)**
+
+| Model | LogReg | XGBoost |
+|---|---|---|
+| A: time series only (price + DXY, Brent, VIX) | **0.458** | 0.440 ± 0.014 |
+| B: A + Task 2 NLP | 0.388 | 0.431 ± 0.007 |
+| C: A + Task 3 text (FinBERT tone, best on validation) | 0.422 | **0.445** ± 0.009 |
+
+Transformer features beat Task 2's NLP but do not measurably beat the time series alone (C vs A intervals include zero). The analysis explains why: every text block tells the training period from the test year with ROC-AUC 0.83-0.99, while price and market features cannot (0.51-0.61), so what is learned from 2021-24 news does not transfer to 2025-26. Full tables are in `reports/task3/` and `notebooks/task3/`.
+
+**Running it on a Mac.** `python -m src.run_task3` encodes FinBERT with `python -m src.text_embeddings` one 50k part per fresh process (MPS throughput decays in long runs under memory pressure; `TASK3_DEVICE=cpu` forces the CPU). XGBoost is imported before torch because each ships its own OpenMP runtime on macOS (torch first makes XGBoost segfault; multi-threaded torch after XGBoost can deadlock).
 
 ## Why GDELT's bulk files and not its API
 

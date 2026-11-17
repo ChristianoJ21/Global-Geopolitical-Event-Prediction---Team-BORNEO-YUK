@@ -1,0 +1,11 @@
+{
+  "n_test": 240,
+  "both_right": 94,
+  "only_C_right": 7,
+  "only_A_right": 16,
+  "both_wrong": 123,
+  "A_false_signals": 68,
+  "C_false_signals": 67,
+  "false_signals_fixed_by_C": 5,
+  "mcnemar_p": 0.0931396484375
+}

@@ -1,0 +1,227 @@
+stage,experiment,model,params,val_macro_f1
+0_task2,A0: price only,logreg,"{""C"": 0.01}",0.39257725160479323
+0_task2,A0: price only,logreg,"{""C"": 0.1}",0.4034129993826616
+0_task2,A0: price only,logreg,"{""C"": 1.0}",0.39758186732069206
+0_task2,A0: price only,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.34330850634413473
+0_task2,A0: price only,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.3718956361655583
+0_task2,A0: price only,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.3645785112091935
+0_task2,A0: price only,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.35401383805732906
+0_task2,A: time series (price+market),logreg,"{""C"": 0.01}",0.43425545928965903
+0_task2,A: time series (price+market),logreg,"{""C"": 0.1}",0.43948303064212874
+0_task2,A: time series (price+market),logreg,"{""C"": 1.0}",0.4254743705983746
+0_task2,A: time series (price+market),xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4290523642799431
+0_task2,A: time series (price+market),xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4246248375280633
+0_task2,A: time series (price+market),xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4346449467333649
+0_task2,A: time series (price+market),xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.43545219471045543
+0_task2,B: A + Task 2 NLP,logreg,"{""C"": 0.01}",0.47822664530094744
+0_task2,B: A + Task 2 NLP,logreg,"{""C"": 0.1}",0.5041958361360938
+0_task2,B: A + Task 2 NLP,logreg,"{""C"": 1.0}",0.5086240311880393
+0_task2,B: A + Task 2 NLP,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.43725410392077063
+0_task2,B: A + Task 2 NLP,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4925585396133991
+0_task2,B: A + Task 2 NLP,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.478911854968193
+0_task2,B: A + Task 2 NLP,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.48747487043287413
+1_representation,A + emb_glove_mean,logreg,"{""C"": 0.01}",0.45029026869517663
+1_representation,A + emb_glove_mean,logreg,"{""C"": 0.1}",0.44862240733452846
+1_representation,A + emb_glove_mean,logreg,"{""C"": 1.0}",0.45580769687439365
+1_representation,A + emb_glove_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.45036122060215417
+1_representation,A + emb_glove_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4228181880422131
+1_representation,A + emb_glove_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4369956187184913
+1_representation,A + emb_glove_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.42131302198984094
+1_representation,text only: emb_glove_mean,logreg,"{""C"": 0.01}",0.35387856897144826
+1_representation,text only: emb_glove_mean,logreg,"{""C"": 0.1}",0.35714077952297846
+1_representation,text only: emb_glove_mean,logreg,"{""C"": 1.0}",0.35714077952297846
+1_representation,A + emb_ppmi_mean,logreg,"{""C"": 0.01}",0.4148586198861915
+1_representation,A + emb_ppmi_mean,logreg,"{""C"": 0.1}",0.4118822036448317
+1_representation,A + emb_ppmi_mean,logreg,"{""C"": 1.0}",0.41283251839675245
+1_representation,A + emb_ppmi_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.45589861624724587
+1_representation,A + emb_ppmi_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4604597542747501
+1_representation,A + emb_ppmi_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4505087059690334
+1_representation,A + emb_ppmi_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.4208532935040649
+1_representation,text only: emb_ppmi_mean,logreg,"{""C"": 0.01}",0.24720457931467107
+1_representation,text only: emb_ppmi_mean,logreg,"{""C"": 0.1}",0.24726322823643765
+1_representation,text only: emb_ppmi_mean,logreg,"{""C"": 1.0}",0.24726322823643765
+1_representation,A + emb_minilm_mean,logreg,"{""C"": 0.01}",0.4352120997282287
+1_representation,A + emb_minilm_mean,logreg,"{""C"": 0.1}",0.43606055886358286
+1_representation,A + emb_minilm_mean,logreg,"{""C"": 1.0}",0.43971306471306476
+1_representation,A + emb_minilm_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4359125470283354
+1_representation,A + emb_minilm_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.44176509282031845
+1_representation,A + emb_minilm_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.42765151515151517
+1_representation,A + emb_minilm_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.44025297028393
+1_representation,text only: emb_minilm_mean,logreg,"{""C"": 0.01}",0.27208249135228485
+1_representation,text only: emb_minilm_mean,logreg,"{""C"": 0.1}",0.2746495346347088
+1_representation,text only: emb_minilm_mean,logreg,"{""C"": 1.0}",0.2746495346347088
+2_strategy,A + emb_minilm_decay,logreg,"{""C"": 0.01}",0.40000725627067163
+2_strategy,A + emb_minilm_decay,logreg,"{""C"": 0.1}",0.4016243516243516
+2_strategy,A + emb_minilm_decay,logreg,"{""C"": 1.0}",0.4085215880878483
+2_strategy,A + emb_minilm_decay,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.45938375350140054
+2_strategy,A + emb_minilm_decay,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.43810816174875494
+2_strategy,A + emb_minilm_decay,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.44400555921293244
+2_strategy,A + emb_minilm_decay,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.41005291005291006
+2_strategy,text only: emb_minilm_decay,logreg,"{""C"": 0.01}",0.28029308080458976
+2_strategy,text only: emb_minilm_decay,logreg,"{""C"": 0.1}",0.28010424612255275
+2_strategy,text only: emb_minilm_decay,logreg,"{""C"": 1.0}",0.28010424612255275
+2_strategy,A + emb_minilm_attention,logreg,"{""C"": 0.01}",0.41970428926950665
+2_strategy,A + emb_minilm_attention,logreg,"{""C"": 0.1}",0.4147326421749978
+2_strategy,A + emb_minilm_attention,logreg,"{""C"": 1.0}",0.41446760197875276
+2_strategy,A + emb_minilm_attention,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.44079135754262655
+2_strategy,A + emb_minilm_attention,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4299936538156433
+2_strategy,A + emb_minilm_attention,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4455190199871051
+2_strategy,A + emb_minilm_attention,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.4591606432243059
+2_strategy,text only: emb_minilm_attention,logreg,"{""C"": 0.01}",0.3373930237768232
+2_strategy,text only: emb_minilm_attention,logreg,"{""C"": 0.1}",0.3338765680058633
+2_strategy,text only: emb_minilm_attention,logreg,"{""C"": 1.0}",0.3338765680058633
+1_representation,A + emb_finbert_mean,logreg,"{""C"": 0.01}",0.4326733106040737
+1_representation,A + emb_finbert_mean,logreg,"{""C"": 0.1}",0.43897151198481016
+1_representation,A + emb_finbert_mean,logreg,"{""C"": 1.0}",0.45101996424156576
+1_representation,A + emb_finbert_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4618603079551704
+1_representation,A + emb_finbert_mean,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4450100517131981
+1_representation,A + emb_finbert_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.42404146613616794
+1_representation,A + emb_finbert_mean,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.42234010458567983
+1_representation,text only: emb_finbert_mean,logreg,"{""C"": 0.01}",0.3102460103862628
+1_representation,text only: emb_finbert_mean,logreg,"{""C"": 0.1}",0.3045074630269444
+1_representation,text only: emb_finbert_mean,logreg,"{""C"": 1.0}",0.3045074630269444
+2_strategy,A + emb_finbert_decay,logreg,"{""C"": 0.01}",0.4042297350373123
+2_strategy,A + emb_finbert_decay,logreg,"{""C"": 0.1}",0.4305142721082633
+2_strategy,A + emb_finbert_decay,logreg,"{""C"": 1.0}",0.4379526839504502
+2_strategy,A + emb_finbert_decay,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.43463688890773966
+2_strategy,A + emb_finbert_decay,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.43732351098989186
+2_strategy,A + emb_finbert_decay,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4060304047954357
+2_strategy,A + emb_finbert_decay,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.42009608574608426
+2_strategy,text only: emb_finbert_decay,logreg,"{""C"": 0.01}",0.30279863553316644
+2_strategy,text only: emb_finbert_decay,logreg,"{""C"": 0.1}",0.3052406949857216
+2_strategy,text only: emb_finbert_decay,logreg,"{""C"": 1.0}",0.3052406949857216
+2_strategy,A + emb_finbert_attention,logreg,"{""C"": 0.01}",0.42131809842865114
+2_strategy,A + emb_finbert_attention,logreg,"{""C"": 0.1}",0.4419926822403603
+2_strategy,A + emb_finbert_attention,logreg,"{""C"": 1.0}",0.44514760510028467
+2_strategy,A + emb_finbert_attention,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4393289328932893
+2_strategy,A + emb_finbert_attention,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4210685060928227
+2_strategy,A + emb_finbert_attention,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.41893190085683757
+2_strategy,A + emb_finbert_attention,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.411764705882353
+2_strategy,text only: emb_finbert_attention,logreg,"{""C"": 0.01}",0.338342935425817
+2_strategy,text only: emb_finbert_attention,logreg,"{""C"": 0.1}",0.34180028779936267
+2_strategy,text only: emb_finbert_attention,logreg,"{""C"": 1.0}",0.34180028779936267
+2_strategy,A + finbert_sent,logreg,"{""C"": 0.01}",0.4559851100551946
+2_strategy,A + finbert_sent,logreg,"{""C"": 0.1}",0.420676048187343
+2_strategy,A + finbert_sent,logreg,"{""C"": 1.0}",0.4154038577456299
+2_strategy,A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.42129052571865744
+2_strategy,A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4648067510247939
+2_strategy,A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4167740066390315
+2_strategy,A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.44769104435839785
+2_strategy,text only: finbert_sent,logreg,"{""C"": 0.01}",0.3376675279931094
+2_strategy,text only: finbert_sent,logreg,"{""C"": 0.1}",0.32467295237442856
+2_strategy,text only: finbert_sent,logreg,"{""C"": 1.0}",0.30143407790466614
+2_strategy,A + topics,logreg,"{""C"": 0.01}",0.4394281463447623
+2_strategy,A + topics,logreg,"{""C"": 0.1}",0.44957337348641696
+2_strategy,A + topics,logreg,"{""C"": 1.0}",0.4404190825790126
+2_strategy,A + topics,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4253361707826178
+2_strategy,A + topics,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.45132334382054423
+2_strategy,A + topics,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4412550481515998
+2_strategy,A + topics,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.4221672185369753
+2_strategy,text only: topics,logreg,"{""C"": 0.01}",0.31662490343068217
+2_strategy,text only: topics,logreg,"{""C"": 0.1}",0.3141343925852367
+2_strategy,text only: topics,logreg,"{""C"": 1.0}",0.3141343925852367
+2_strategy,A + entity,logreg,"{""C"": 0.01}",0.4099728168535508
+2_strategy,A + entity,logreg,"{""C"": 0.1}",0.3940091788607183
+2_strategy,A + entity,logreg,"{""C"": 1.0}",0.39755028387642977
+2_strategy,A + entity,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4244226245389712
+2_strategy,A + entity,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.42391634397595723
+2_strategy,A + entity,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.42964912280701756
+2_strategy,A + entity,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.4227770821463787
+2_strategy,text only: entity,logreg,"{""C"": 0.01}",0.26705537076892977
+2_strategy,text only: entity,logreg,"{""C"": 0.1}",0.25885364116799064
+2_strategy,text only: entity,logreg,"{""C"": 1.0}",0.28565875557745474
+4_tuning,tuned: A + finbert_sent,logreg,"{""C"": 0.003}",0.4298579497925654
+4_tuning,tuned: A + finbert_sent,logreg,"{""C"": 0.01}",0.4559851100551946
+4_tuning,tuned: A + finbert_sent,logreg,"{""C"": 0.03}",0.4420854303781134
+4_tuning,tuned: A + finbert_sent,logreg,"{""C"": 0.1}",0.420676048187343
+4_tuning,tuned: A + finbert_sent,logreg,"{""C"": 0.3}",0.41311447350403946
+4_tuning,tuned: A + finbert_sent,logreg,"{""C"": 1.0}",0.4154038577456299
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 100, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.41169312003455133
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 100, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.4020150849938084
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 100, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.42129052571865744
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 100, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.405302798670988
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.4109563778011676
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.4033926145957952
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4648067510247939
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.4267895669594699
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 600, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.41529869494001553
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 600, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.4200469071158726
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 600, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4478634132392149
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 2, ""n_estimators"": 600, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.45844598621939303
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 100, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.42884824405627847
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 100, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.4240662133388282
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 100, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4167740066390315
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 100, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.41998409692983546
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 300, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.4243614745610255
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 300, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.4370394238948334
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.44769104435839785
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.42633780286241185
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 600, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.450034232943237
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 600, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.45003516437119817
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 600, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4464812281501748
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 3, ""n_estimators"": 600, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.4209066178884668
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 100, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.41878306878306876
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 100, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.42725947787433266
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 100, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4198567350428333
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 100, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.42205073509421337
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 300, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.4232331162853679
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 300, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.4367427444350522
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4241948000955465
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.4316243656329713
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 600, ""learning_rate"": 0.02, ""min_child_weight"": 1}",0.4283832325530017
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 600, ""learning_rate"": 0.02, ""min_child_weight"": 5}",0.43972420245900734
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 600, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4430916305916306
+4_tuning,tuned: A + finbert_sent,xgb,"{""max_depth"": 4, ""n_estimators"": 600, ""learning_rate"": 0.05, ""min_child_weight"": 5}",0.4265275120517482
+5_ablation,A0|seed42,logreg,"{""C"": 0.01}",0.39257725160479323
+5_ablation,A0|seed42,logreg,"{""C"": 0.1}",0.4034129993826616
+5_ablation,A0|seed42,logreg,"{""C"": 1.0}",0.39758186732069206
+5_ablation,A|seed42,logreg,"{""C"": 0.01}",0.43425545928965903
+5_ablation,A|seed42,logreg,"{""C"": 0.1}",0.43948303064212874
+5_ablation,A|seed42,logreg,"{""C"": 1.0}",0.4254743705983746
+5_ablation,B|seed42,logreg,"{""C"": 0.01}",0.47822664530094744
+5_ablation,B|seed42,logreg,"{""C"": 0.1}",0.5041958361360938
+5_ablation,B|seed42,logreg,"{""C"": 1.0}",0.5086240311880393
+5_ablation,C|seed42,logreg,"{""C"": 0.01}",0.4559851100551946
+5_ablation,B+C|seed42,logreg,"{""C"": 0.01}",0.41388165313398956
+5_ablation,A0|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.34330850634413473
+5_ablation,A0|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.3718956361655583
+5_ablation,A0|seed42,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.3645785112091935
+5_ablation,A0|seed42,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.35401383805732906
+5_ablation,A0|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.3422356307833417
+5_ablation,A0|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.3570194589463693
+5_ablation,A0|seed123,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.36553639846743297
+5_ablation,A0|seed123,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.3180014984818013
+5_ablation,A0|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.3284292197335676
+5_ablation,A0|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.3392888421790156
+5_ablation,A0|seed2024,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.37445067260905557
+5_ablation,A0|seed2024,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.36335981962375685
+5_ablation,A|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4290523642799431
+5_ablation,A|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4246248375280633
+5_ablation,A|seed42,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4346449467333649
+5_ablation,A|seed42,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.43545219471045543
+5_ablation,A|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.422046496495998
+5_ablation,A|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.44587628865979384
+5_ablation,A|seed123,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.42013049518514656
+5_ablation,A|seed123,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.42598555621811435
+5_ablation,A|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.4221189605483571
+5_ablation,A|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.42653941394836886
+5_ablation,A|seed2024,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4115656107994851
+5_ablation,A|seed2024,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.43569457036972326
+5_ablation,B|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.43725410392077063
+5_ablation,B|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4925585396133991
+5_ablation,B|seed42,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.478911854968193
+5_ablation,B|seed42,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.48747487043287413
+5_ablation,B|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.40939498701586846
+5_ablation,B|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4568662109656659
+5_ablation,B|seed123,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4636651773780884
+5_ablation,B|seed123,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.4602846704757533
+5_ablation,B|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 100}",0.44880174291939
+5_ablation,B|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 300}",0.4793556498506993
+5_ablation,B|seed2024,xgb,"{""max_depth"": 3, ""n_estimators"": 100}",0.4651576779375084
+5_ablation,B|seed2024,xgb,"{""max_depth"": 3, ""n_estimators"": 300}",0.4568749235509961
+5_ablation,C|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4648067510247939
+5_ablation,C|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4210563000982163
+5_ablation,C|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4426202417324802
+5_ablation,B+C|seed42,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.43927965182320583
+5_ablation,B+C|seed123,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4233629300776915
+5_ablation,B+C|seed2024,xgb,"{""max_depth"": 2, ""n_estimators"": 300, ""learning_rate"": 0.05, ""min_child_weight"": 1}",0.4884524063958778

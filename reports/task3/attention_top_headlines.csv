@@ -1,0 +1,241 @@
+date,news_bucket,attention,headline
+2025-09-01,2025-08-29,0.13740196824073792,Major Russian attack includes rare strikes on centre of Kyiv
+2025-09-02,2025-09-01,0.09982118755578995,"Hamas spokesman killed in Gaza attack, claims Israel"
+2025-09-03,2025-09-02,0.10966851562261581,GE Aerospace hit by UAW strike at two key facilities
+2025-09-04,2025-09-03,0.1309107095003128,Trump confirms U.S. strike on alleged Venezuelan drug boat
+2025-09-08,2025-09-04,0.13600628077983856,Russia hits Kyiv in largest aerial attack on Ukraine since war began
+2025-09-09,2025-09-08,0.14040999114513397,Government building damaged in Kyiv in largest Russian attack since war began
+2025-09-10,2025-09-09,0.0840802863240242,Israel bombs Gaza high-rise as US advances ceasefire proposal
+2025-09-11,2025-09-10,0.10826629400253296,Starmer to meet Israeli president after condemning strike on Hamas in Qatar
+2025-09-12,2025-09-11,0.073177769780159,"Israeli strike on Hamas in mediator Qatar causes 'friction' between Netanyahu, Trump"
+2025-09-15,2025-09-12,0.08442340046167374,UK to join Nato's Eastern Sentry operation after Russian drone incursion
+2025-09-16,2025-09-15,0.07187069207429886,Qatar denounces Israel before major summit on Israel's attack targeting Hamas leaders
+2025-09-17,2025-09-16,0.11068890243768692,Massive air strikes as Israeli tanks pour into Gaza City
+2025-09-18,2025-09-17,0.12101641297340393,Zelenskyy calls for a European air defense system as Russian strike wounds 20 in Ukrainian city
+2025-09-19,2025-09-18,0.06800192594528198,Israeli tanks surround Gaza City ahead of ground incursion as EU proposes sanctions amid global outcry
+2025-09-22,2025-09-19,0.11999902874231339,Ukraine hit by deadly Russian missile barrage
+2025-09-23,2025-09-22,0.088056780397892,German and Swedish jets intercept Russian military plane over Baltic Sea
+2025-09-24,2025-09-23,0.06648832559585571,Moldova detains 74 people over an alleged Russia-backed unrest plot around key election
+2025-09-25,2025-09-24,0.07088709622621536,"Trump calls China, India 'primary funders' of Ukraine war over Russian oil purchases at UNGA"
+2025-09-26,2025-09-25,0.07116470485925674,"Wall Street extends losses Wednesday, dollar strengthens"
+2025-09-29,2025-09-26,0.09747720509767532,NORAD detects Russian bombers and fighter jets near Alaskan air defense zone
+2025-09-30,2025-09-29,0.1070069745182991,"Microsoft restricts Israeli unit's cloud, AI over Gaza surveillance"
+2025-10-01,2025-09-30,0.08499399572610855,Trump's frustrations with Putin mount as US considers long-range missiles for Ukraine
+2025-10-02,2025-10-01,0.06805909425020218,Democrats embrace shutdown fight in rare moment of unity against Trump
+2025-10-03,2025-10-02,0.0692877545952797,Activists say Israel's navy has begun intercepting a Gaza-bound aid flotilla
+2025-10-06,2025-10-03,0.0793595239520073,Israeli forces intercept last boat from Gaza flotilla
+2025-10-07,2025-10-06,0.15133318305015564,Deadly night-time Russian barrage hits Ukraine
+2025-10-08,2025-10-07,0.1274728626012802,"Ukraine claims it struck Russian ammo plant, oil terminal and weapons depot"
+2025-10-09,2025-10-08,0.10206835716962814,Gaza-bound aid flotilla says several boats intercepted by Israel
+2025-10-10,2025-10-09,0.06339120119810104,"Israel and Hamas agree to 'first phase' of plan to end Gaza fighting, says Trump"
+2025-10-13,2025-10-10,0.12090196460485458,Israeli strike kills 30 Palestinians in Gaza since ceasefire deal announcement
+2025-10-14,2025-10-13,0.0652126893401146,Hamas hands over first seven hostages in Gaza ceasefire
+2025-10-15,2025-10-14,0.21074604988098145,Seven hurt as Russian aerial attack hits Ukrainian hospital
+2025-10-16,2025-10-15,0.09082414954900742,Trump officials back firm in fight over California offshore oil drilling after huge spill
+2025-10-17,2025-10-16,0.050968170166015625,"Trump claims India will stop buying Russian oil, escalating pressure on Moscow over Ukraine war"
+2025-10-20,2025-10-17,0.07356629520654678,Israel identifies bodies of two hostages as Gaza border crossing remains closed
+2025-10-21,2025-10-20,0.12342891097068787,Ukrainian drones strike major Russian gas plant as Trump says Kyiv may have to trade land for peace
+2025-10-22,2025-10-21,0.07348843663930893,U.S. stocks rally on hopes for end to shutdown
+2025-10-23,2025-10-22,0.2393081784248352,Six killed in massive Russian drone and missile attack on Ukraine - officials
+2025-10-24,2025-10-23,0.09925177693367004,"Russian aerial strike on Ukraine kills 6, including 2 children, as kindergarten hit, Kyiv says"
+2025-10-27,2025-10-24,0.11926564574241638,Russian strikes on Ukraine kill at least four people and wound 20
+2025-10-28,2025-10-27,0.09900256246328354,Three killed in overnight drone attack on Kyiv
+2025-10-29,2025-10-28,0.09560680389404297,Russia says test of nuclear-powered missile reflects security concerns
+2025-10-30,2025-10-29,0.06093333661556244,Man Accused Of Stabbing 2 Teens With Metal Fork During Flight
+2025-10-31,2025-10-30,0.08789899945259094,Trump says South Korea will build a nuclear submarine in the U.S.
+2025-11-03,2025-10-31,0.06651902198791504,"Pentagon cleared giving Ukraine long-range Tomahawk missiles, leaving final decision to Trump"
+2025-11-04,2025-11-03,0.12664172053337097,Ukrainian drone strike hits key Russian oil port
+2025-11-05,2025-11-04,0.15116547048091888,Ukrainian drones attack industrial plant 800 miles inside Russia
+2025-11-06,2025-11-05,0.06508360058069229,"Russian, Ukrainian troops battle in ruins of Pokrovsk"
+2025-11-07,2025-11-06,0.20615775883197784,Ukraine says it has hit a major Russian oil refinery with long-range drones
+2025-11-10,2025-11-07,0.2016424685716629,Russian drone strike on Ukraine tower block kills three
+2025-11-11,2025-11-10,0.04394170641899109,Russian drones kill 4 in Ukraine | The Arkansas Democrat-Gazette
+2025-11-12,2025-11-11,0.07460917532444,Latest US strikes on alleged drug boats kill 6 in the eastern Pacific
+2025-11-13,2025-11-12,0.12778021395206451,Russia makes gains in southern Ukraine as it expands frontline attacks
+2025-11-14,2025-11-13,0.0532333143055439,Kremlin Claims Willingness for Peace Talks While Expanding Offensive in Donetsk Region
+2025-11-17,2025-11-14,0.04319455847144127,"Russia's massive attack on Kyiv kills at least 4 people, injures dozens of others"
+2025-11-18,2025-11-17,0.10706133395433426,"US trade deal gives Seoul nuclear sub rights, slashes tariffs"
+2025-11-19,2025-11-18,0.11732903867959976,Russia Escalates Drone and Missile Assault on Ukraine
+2025-11-20,2025-11-19,0.13259445130825043,Coalition promises missile boost without confirming 3% defence spend
+2025-11-21,2025-11-20,0.11090727895498276,Deadly US-Made ATACMS Missiles Hit Targets Deep Inside Russia in Precedent
+2025-11-24,2025-11-21,0.05491453409194946,Trump plan to end Ukraine war would involve ceding territory to Russia
+2025-11-25,2025-11-24,0.08545026183128357,Israel military assassinates senior Hezbollah commander
+2025-11-26,2025-11-25,0.12886331975460052,Russian attacks kill at least 6 in Ukraine as talks on peace plan continue
+2025-11-27,2025-11-26,0.08223827928304672,Russian attacks kill at least 7 in Ukraine as talks on a U.S. peace plan continue
+2025-11-28,2025-11-27,0.0686170756816864,Russia Claims Leaked Call With US Intended To Disrupt Peace Deal
+2025-12-01,2025-11-28,0.10696294158697128,Russian attacks kill three in Ukraine as efforts to end war gain momentum
+2025-12-02,2025-12-01,0.0455753393471241,Pope Leo XIV doubles down on insistence for 2-state solution to resolve Israeli
+2025-12-03,2025-12-02,0.12758369743824005,Ukraine hits Russian oil tankers with underwater drone in Black Sea
+2025-12-04,2025-12-03,0.05253354832530022,Putin threatens to 'cut Ukraine off from the sea' after attacks on tankers
+2025-12-05,2025-12-04,0.17737072706222534,Putin Launches Massive Attack On Ukraine After Rejecting US Peace Deal
+2025-12-08,2025-12-05,0.07929855585098267,Russia unleashes massive overnight attack on Ukraine as peace talks continue
+2025-12-09,2025-12-08,0.09503895044326782,The Kremlin praises new US security strategy as Russian strikes kill 4 in Ukraine
+2025-12-10,2025-12-09,0.06170722469687462,European allies back Zelenskyy after Trump criticism
+2025-12-11,2025-12-10,0.0571250282227993,Plane Crashes Into Traffic While Making Emergency Landing On Highway
+2025-12-12,2025-12-11,0.09212826937437057,US Seizes Oil Tanker Off Coast Of Venezuela
+2025-12-15,2025-12-12,0.08443796634674072,Two killed in Russia as Ukraine peace talks press on
+2025-12-16,2025-12-15,0.09912755340337753,Hamas says Israel's killing of senior commander threatens Gaza ceasefire
+2025-12-17,2025-12-16,0.06735894829034805,JetBlue Plane Nearly Collided With US Military Aircraft Near Venezuela
+2025-12-18,2025-12-17,0.0868217721581459,Trump orders blockade of 'sanctioned oil tankers' into Venezuela
+2025-12-19,2025-12-18,0.08721467107534409,Crude prices surge after Trump orders Venezuela oil blockade
+2025-12-22,2025-12-19,0.11852564662694931,U.S. launches strikes in Syria targeting Islamic State fighters after American deaths
+2025-12-23,2025-12-22,0.05624374747276306,US seizes second oil tanker off Venezuela amid rising tensions
+2025-12-24,2025-12-23,0.09559708833694458,Major Russian drone and missile attack on Ukraine kills at least 3 people and cuts power
+2025-12-29,2025-12-24,0.09428044408559799,"Blast in Gaza wounds one, Israel accuses Hamas of ceasefire violation"
+2025-12-30,2025-12-29,0.10170070081949234,"Trump, Zelenskyy to discuss Ukraine peace talks amid Russian attacks at Mar-a"
+2025-12-31,2025-12-30,0.16519290208816528,Russia Claims Ukraine Attacked Putin's Residence
+2026-01-02,2025-12-31,0.09928379207849503,Russia says Ukrainian drone strike kills 24 in occupied Ukraine as tensions grow amid peace talks
+2026-01-05,2026-01-02,0.11193519085645676,Drone strike kills 1 in Russian border region ahead of Ukraine peace talks
+2026-01-06,2026-01-05,0.06334211677312851,Hundreds protest U.S. attack on Venezuela at American consulate in Amsterdam
+2026-01-07,2026-01-06,0.10601522773504257,"Taiwan detects 8 sorties of Chinese PLA aircraft, 7 naval vessels around its territory"
+2026-01-08,2026-01-07,0.0785103514790535,Trump weighs military option to acquire Greenland
+2026-01-09,2026-01-08,0.07357755303382874,"British armed forces were involved in US seizure of oil tanker, MoD reveals"
+2026-01-12,2026-01-09,0.10105667263269424,Ukrainian drones set fire to Russian oil depot after Moscow launches new hypersonic missile
+2026-01-13,2026-01-12,0.125836580991745,Ukraine says it hit Russia oil platforms in Caspian Sea
+2026-01-14,2026-01-13,0.08752652257680893,Four killed as Russia launches another major attack on Ukraine's power grid
+2026-01-15,2026-01-14,0.05480676889419556,Plane used in strike off Venezuela was painted like a civilian aircraft
+2026-01-19,2026-01-15,0.09164899587631226,"US launches new retaliatory strike in Syria, killing leader tied to deadly Islamic State ambush"
+2026-01-20,2026-01-19,0.047977592796087265,Europe hits back at Trump's tariff threat over Greenland
+2026-01-21,2026-01-20,0.1439206451177597,Russia targets Ukrainian power grid in overnight attack
+2026-01-22,2026-01-21,0.055567871779203415,"U.S. stock, bond and currency markets shattered by Trump antics"
+2026-01-23,2026-01-22,0.09012115746736526,Wall Street recovers after Trump retreat on Greenland
+2026-01-26,2026-01-23,0.0755937471985817,Trump threatens Canada with 100% tariffs over trade deal with China
+2026-01-27,2026-01-26,0.13197530806064606,Yemen rebels threaten new Red Sea attack as US aircraft carrier heads toward Iran
+2026-01-28,2026-01-27,0.06981465965509415,Trump says Iran wants talks as US aircraft carrier deploys
+2026-01-29,2026-01-28,0.06828255206346512,Aussie dollar breaks barrier as greenback loses shine
+2026-01-30,2026-01-29,0.08165936917066574,"Trump Issues Warning To Iran, Says US Armada Ready For 'Violence'"
+2026-02-02,2026-01-30,0.09204123169183731,Israeli strikes kill 23 Palestinians as Gaza ceasefire inches forward
+2026-02-03,2026-02-02,0.09004411101341248,15 killed in Russian strike on Dnipro as Zelensky announces more peace talks
+2026-02-04,2026-02-03,0.06020011380314827,Trump Cuts Tariffs On India After Modi Agrees To Stop Buying Russian Oil
+2026-02-05,2026-02-04,0.1315142661333084,Russia bombards Ukraine with drones and missiles day before planned peace talks
+2026-02-06,2026-02-05,0.1174614205956459,"Claiming India will stop buying Russian oil, Trump to drop tariffs"
+2026-02-09,2026-02-06,0.08228052407503128,Iran Seizes Oil Tankers Hours Before US Talks
+2026-02-10,2026-02-09,0.056006450206041336,No injuries reported after multiple shots fired into Kentucky mobile home
+2026-02-11,2026-02-10,0.0667835995554924,"Israeli strikes kill 3 people in Gaza, hospital says"
+2026-02-12,2026-02-11,0.09175179153680801,"Israeli strikes kill five in Gaza, health officials say"
+2026-02-13,2026-02-12,0.07882577180862427,Muslim community reels after police violence at protest
+2026-02-18,2026-02-13,0.18482530117034912,Ukrainian drone strike sparks fires at Russian Black Sea port
+2026-02-19,2026-02-18,0.11500031501054764,Iran Partially Closes Strait Of Hormuz Amid Nuclear Talks With US
+2026-02-20,2026-02-19,0.06796858459711075,Opposition figure Ferrer backs Venezuela-like US operation for Cuba
+2026-02-23,2026-02-20,0.07815083861351013,US military airlifts small reactor as Trump pushes to quickly deploy nuclear power
+2026-02-24,2026-02-23,0.10966464132070541,Ukraine strikes heart of Russia's missile arsenal with homemade weapon
+2026-02-25,2026-02-24,0.0825171172618866,Ukraine drones hit facility for oil pipeline in Russia
+2026-02-26,2026-02-25,0.07932760566473007,Iran pushes back against Trump ahead of Geneva talks in face of major US military deployment
+2026-02-27,2026-02-26,0.09075840562582016,Ukraine says Russia launched major aerial attack ahead of Geneva talks with US
+2026-03-02,2026-02-27,0.06564643979072571,"US And Israel Attack Iran, With Trump Confirming ""Major Combat Operations"""
+2026-03-03,2026-03-02,0.11014503240585327,Hezbollah strikes Israel as American and Israeli planes pound Iran
+2026-03-04,2026-03-03,0.11582785844802856,War widens as Israel and US pound Iran and Tehran and its allies hit back
+2026-03-05,2026-03-04,0.08782762289047241,Macron orders France's nuclear-powered aircraft carrier to Mediterranean
+2026-03-06,2026-03-05,0.1753658801317215,"U.S-Israeli strikes continue across Iran, Iranian drones hit Azerbaijan"
+2026-03-09,2026-03-06,0.06790778785943985,"US knocked out 42 Iran's Navy ships, claims Trump"
+2026-03-10,2026-03-09,0.05286835506558418,US says it will not hit Iran energy sector
+2026-03-11,2026-03-10,0.046676021069288254,Trump says U.S. is 'achieving major strides' in Iran toward military objectives
+2026-03-12,2026-03-11,0.08155100792646408,Pentagon Says 140 US Troops Injured In First 10 Days Of Iran War
+2026-03-13,2026-03-12,0.07292111963033676,FBI sounds alarm over alleged Iranian covert drone plot targeting California
+2026-03-16,2026-03-13,0.057359036058187485,Tehran claims US attacked it from UAE as war enters its third week
+2026-03-17,2026-03-16,0.09655631333589554,Trump threatens NATO allies over Strait of Hormuz help
+2026-03-25,2026-03-17,0.08256468921899796,"Iran threatens Gulf energy, water after Trump ultimatum"
+2026-03-26,2026-03-25,0.1210891380906105,Iran Attacks Israel After Threat To 'Remove Any Hope Of Negotiation'
+2026-03-27,2026-03-26,0.07745879888534546,Turkish tanker blacklisted by Ukraine hit in drone attack media
+2026-03-30,2026-03-27,0.09467282891273499,Navy fits ship with minehunting drones ahead of possible Hormuz deployment
+2026-03-31,2026-03-30,0.055725738406181335,"Ukraine-Russia war latest: Kyiv strikes chemical plant deep behind enemy lines with drones, report claims"
+2026-04-01,2026-03-31,0.061023373156785965,Full tank of diesel breaks £100 mark as Iran oil crisis deepens
+2026-04-02,2026-04-01,0.0763159915804863,Trump to address nation after saying U.S. may leave war within weeks
+2026-04-06,2026-04-02,0.0647798702120781,Iran fires on targets across the Middle East while Israel and US hit Tehran as war nears its 5th week
+2026-04-07,2026-04-06,0.10713519901037216,Russian attacks kill 4 as Ukraine drones target oil infrastructure
+2026-04-08,2026-04-07,0.08568128198385239,"Iran Rejects Temporary Ceasefire As Israeli, US Airstrikes Continue"
+2026-04-09,2026-04-08,0.07949882000684738,Oil Prices Rise Amid US Attack On Iran's Oil
+2026-04-10,2026-04-09,0.07310142368078232,"US-Iran ceasefire strained by Israel strikes in Lebanon, Strait of Hormuz dispute"
+2026-04-13,2026-04-10,0.1044573187828064,Russia 'strikes Ukraine with drones' despite Putin-declared ceasefire
+2026-04-14,2026-04-13,0.06266715377569199,Trump Announces US Will Blockade Strait Of Hormuz
+2026-04-15,2026-04-14,0.09096789360046387,Trump vows to sink Iranian ships approaching a U.S. blockade of Strait of Hormuz
+2026-04-16,2026-04-15,0.06499163061380386,Chancellor to hold talks with US counterpart after strong criticism of Iran war
+2026-04-17,2026-04-16,0.03570433333516121,IMF urges targeted aid over fuel subsidies as oil prices surge
+2026-04-20,2026-04-17,0.11719892174005508,"Iran Closes Strait of Hormuz, Warns Military Will Target Approaching Ships"
+2026-04-21,2026-04-20,0.06721870601177216,Iranian forces launch drones toward US warships after attack on commercial ship in Sea of Oman: Iran media
+2026-04-22,2026-04-21,0.12440353631973267,Iran Vows Retaliation After US Seizes Ship
+2026-04-23,2026-04-22,0.09954935312271118,Ships attacked in Strait of Hormuz after ceasefire extension
+2026-04-24,2026-04-23,0.06945458799600601,Iran defies US blockade to claim tolls from Hormuz shipping
+2026-04-27,2026-04-24,0.06605163961648941,Trump Says He Ordered Navy To 'Shoot And Kill' Iran Boats In Hormuz
+2026-04-28,2026-04-27,0.12792788445949554,"Pre-dawn Russian drone strike hits Ukraine's Odesa, wounding 14"
+2026-04-29,2026-04-28,0.10277610272169113,"Iran offers to reopen Strait if US lifts blockade and war ends, officials say"
+2026-04-30,2026-04-29,0.06390929222106934,"Ukraine says it shot down 33,000 Russian drones in March"
+2026-05-04,2026-04-30,0.11312583088874817,"Drone kills 2 in Kherson minibus strike, as Russia claims front-line progress"
+2026-05-05,2026-05-04,0.0847034677863121,UK military says bulk carrier near Strait of Hormuz reports being attacked
+2026-05-06,2026-05-05,0.1254296898841858,Iran strikes on UAE condemned by Starmer amid US bid to open Strait of Hormuz
+2026-05-07,2026-05-06,0.12350493669509888,Russian strikes kill 21 in Ukraine
+2026-05-08,2026-05-07,0.09254131466150284,Trump threatens bombing as Iran weighs US deal
+2026-05-11,2026-05-08,0.10735571384429932,UAE reports drone and missile attack as Iran war ceasefire is challenged
+2026-05-12,2026-05-11,0.11380115896463394,Iran responds to US ceasefire proposal as drones target Gulf nations
+2026-05-13,2026-05-12,0.06620603054761887,Transatlantic talks on Strait of Hormuz ahead of summit on defensive mission
+2026-05-18,2026-05-13,0.07076993584632874,Hormuz ship seizure and Oman attack raise tensions
+2026-05-19,2026-05-18,0.11488576978445053,"Ukraine conducts large-scale drone strikes on Russia, killing 4 and wounding 12 others"
+2026-05-20,2026-05-19,0.10893841832876205,Trump Says Attack On Iran Postponed As Talks Continue
+2026-05-21,2026-05-20,0.07330646365880966,Trump suggests Iranian attack was imminent but will hold fire at request of Arab partners
+2026-05-22,2026-05-21,0.08388230949640274,Ukraine says its drones hit another refinery deep inside Russia as long-range strikes escalate
+2026-05-25,2026-05-22,0.05422636494040489,Trump Says U.S. Will Aid Cuba Amid Rising Tensions
+2026-05-26,2026-05-25,0.13384532928466797,Russia pounds Kyiv in powerful drone and missile attack
+2026-05-29,2026-05-26,0.0797625184059143,"US military says it carried out 'self-defense' strikes in Iran, including on missile launch sites"
+2026-06-02,2026-05-29,0.08046955615282059,"US bombs Iranian military sites and Kuwait hit by drone, missile fire"
+2026-06-03,2026-06-02,0.12897203862667084,Russian missile and drone attacks across Ukraine kill 18 civilians
+2026-06-04,2026-06-03,0.1580888330936432,Iranian drones damage Kuwait airport amid ceasefire strain
+2026-06-05,2026-06-04,0.1198498085141182,One Killed In Iranian Air Strikes On Kuwait
+2026-06-08,2026-06-05,0.12827473878860474,U.S. military says it shot down Iranian drones launched toward Gulf allies
+2026-06-09,2026-06-08,0.09290206432342529,Israel strikes Beirut's southern suburbs days after US-supported ceasefire deal
+2026-06-10,2026-06-09,0.06572473794221878,Iran and Israel halt strikes as new attacks threatened return to full-scale war
+2026-06-11,2026-06-10,0.08875245600938797,US and Iran launch air strikes after Trump blamed Tehran for downing helicopter
+2026-06-12,2026-06-11,0.09245725721120834,"US launches new strikes on Iran, which fires back at Gulf states and Jordan"
+2026-06-15,2026-06-12,0.08485879749059677,Israeli military strikes Beirut suburbs in lead-up to anticipated US
+2026-06-17,2026-06-15,0.0538179874420166,Deal is reached to end Iran war and Trump orders stop to US naval blockade
+2026-06-18,2026-06-17,0.09810515493154526,Warning shots fired from Russian warship at vessel in English Channel
+2026-06-19,2026-06-18,0.06624120473861694,Clouds of black smoke rise over Moscow after Ukrainian drones hit an oil refinery
+2026-06-22,2026-06-19,0.1032947301864624,Ukrainian Drones Hit Moscow Oil Refinery Again
+2026-06-23,2026-06-22,0.08460444211959839,Trump Threatens Iran Over Strait of Hormuz
+2026-06-24,2026-06-23,0.06354845315217972,Trump allies defend him to Israelis anxious over Iran deal
+2026-06-25,2026-06-24,0.10056262463331223,"Moscow shoots down dozens of drones, flights briefly halted"
+2026-06-26,2026-06-25,0.09168434143066406,Dispute over inspections clouds progress in Iran nuclear negotiations
+2026-06-29,2026-06-26,0.1015726700425148,US strikes Iran to respond to drone attack on ship Trump said violated ceasefire
+2026-06-30,2026-06-29,0.1374754160642624,Iran attacks Bahrain and Kuwait following US strikes and threatens to halt talks
+2026-07-01,2026-06-30,0.12497539073228836,"Ukraine launches major drone attack on Moscow, hitting a satellite center and killing a baby"
+2026-07-02,2026-07-01,0.07731448858976364,Supreme Court rejects Trump move against Fed's Cook
+2026-07-03,2026-07-02,0.08867271989583969,A major Russian attack kills 17 in Kyiv as Ukraine keeps striking Moscow's oil sector
+2026-07-06,2026-07-03,0.06595483422279358,Putin shrugs off fuel shortages in Russia as he ramps up attacks on Ukraine
+2026-07-07,2026-07-06,0.2112749218940735,Ukrainian drones hit St Petersburg region oil terminal
+2026-07-08,2026-07-07,0.1145719364285469,Tanker set ablaze after being struck by projectile in the Strait of Hormuz
+2026-07-09,2026-07-08,0.08735647052526474,US launches fresh strikes against Iran after tankers hit in Strait of Hormuz
+2026-07-10,2026-07-09,0.08503331989049911,Iran launches missiles at Gulf states after new US strikes
+2026-07-13,2026-07-10,0.11606528609991074,US military says it is striking Iran in response to attack on civilian vessel
+2026-07-14,2026-07-13,0.10228604078292847,Iran reports new attacks on military targets on Qeshm island near Hormuz strait
+2026-07-15,2026-07-14,0.11595011502504349,Ukraine downs five Russian ballistic missiles as Kyiv aims to harden air defence
+2026-07-16,2026-07-15,0.09851356595754623,US Completes Another Round Of Strikes On Iranian Military Targets
+2026-07-17,2026-07-16,0.11434074491262436,US airstrikes hit northern Iran as it disables ship trying to breach blockade
+2026-07-20,2026-07-17,0.0780244767665863,US strikes bridges and collapses tower at key port as Iran campaign expands
+2026-07-21,2026-07-20,0.07955700904130936,US carries out another round of airstrikes on Iran after death of service member
+2026-07-22,2026-07-21,0.11534428596496582,Another tanker attacked in Strait of Hormuz as US strikes Iran for 10th night
+2026-07-23,2026-07-22,0.11972858756780624,US military completes 11th night of strikes on Iran
+2026-07-24,2026-07-23,0.12826216220855713,US will destroy bridge or power plant for each Iranian attack in strait
+2026-07-27,2026-07-24,0.10202956199645996,Missiles targeting refineries shot down amid US warning
+2026-07-28,2026-07-27,0.06770049035549164,U.S. military has paused its airstrikes on Iran
+2026-07-29,2026-07-28,0.10338323563337326,Houthis claim strikes on Saudi crude oil infrastructure after drone attack in Al
+2026-07-30,2026-07-29,0.08672360330820084,Jordan intercepts Iranian missiles as U.S. and Saudi Arabia strike militias in Iraq
+2026-07-31,2026-07-30,0.1251777857542038,Iran launches missiles as 20 fighters killed by US
+2026-08-03,2026-07-31,0.09814091771841049,"Overnight Russian barrage kills nine in Kyiv, as air defense struggle with U.S. continues"
+2026-08-04,2026-08-03,0.09003746509552002,"Ukraine hits targets deep inside Russia, killing eight"
+2026-08-05,2026-08-04,0.16270235180854797,Russian planes fire glide bombs while Ukrainian drones kill nine
+2026-08-06,2026-08-05,0.16638760268688202,Russian missile and drone barrage in Ukrainian capital region kills 17
+2026-08-07,2026-08-06,0.0775168314576149,Iran vows to target Gulf neighbors if US resumes strikes
+2026-08-10,2026-08-07,0.0727381780743599,Russian attacks kill four as Ukrainian air defences fall short
+2026-08-11,2026-08-10,0.14778026938438416,"Ukrainian drone attack on a Russian city kills 13, officials say, with a refinery reportedly hit"
+2026-08-12,2026-08-11,0.14031663537025452,"Ukrainian drone attack on an oil hub deep inside Russia kills 13, officials say"
+2026-08-13,2026-08-12,0.07641226798295975,"Iranian-backed Houthis kill 6 in attack on vessel, and other developments in the Mideast"
+2026-08-14,2026-08-13,0.07544846087694168,JD Vance dresses down Zelensky over Black Sea tanker attacks FT
+2026-08-18,2026-08-14,0.07912945002317429,"Iran, Oman home in on Hormuz Strait deal as ship attacks mount"
+2026-08-19,2026-08-18,0.08084443211555481,Trump Warns Oman Amid Iran Strait Talks
+2026-08-20,2026-08-19,0.1758328080177307,Ukraine aims drone blitz at Moscow while Russian missiles kill 10 in village
+2026-08-21,2026-08-20,0.1352454572916031,Russian missile and drone barrage kills at least 16 in Ukraine's Kyiv region
+2026-08-24,2026-08-21,0.07869919389486313,Pentagon Reports Over 750 U.S. Troops Wounded In Iran Conflict
+2026-08-26,2026-08-24,0.10606848448514938,Burnham calls on allies to send more interceptor missiles to Ukraine
+2026-08-27,2026-08-26,0.079348124563694,President Trump Approval Rating Hits Record Low
+2026-08-28,2026-08-27,0.0836569294333458,Tanker Hit In Strait Of Hormuz Amid Iran
+2026-08-31,2026-08-28,0.059178318828344345,"Russian drones batter Ukraine's Kyiv region, hitting apartments and warehouses for a second day"
+2026-09-01,2026-08-31,0.09652256965637207,Iran fires missiles at US sites in Jordan; UAE intercepts Iranian drone after strikes

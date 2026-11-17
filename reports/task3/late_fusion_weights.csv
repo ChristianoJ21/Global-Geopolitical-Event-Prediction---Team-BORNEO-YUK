@@ -1,0 +1,85 @@
+w,val_macro_f1,experiment
+0.0,0.43948303064212874,late: A(logreg) + emb_glove_mean
+0.1,0.442570419832681,late: A(logreg) + emb_glove_mean
+0.2,0.4596254343321487,late: A(logreg) + emb_glove_mean
+0.3,0.4621649297249808,late: A(logreg) + emb_glove_mean
+0.4,0.44432379271195027,late: A(logreg) + emb_glove_mean
+0.5,0.4338442025868976,late: A(logreg) + emb_glove_mean
+0.6,0.4372057844705229,late: A(logreg) + emb_glove_mean
+0.0,0.43948303064212874,late: A(logreg) + emb_ppmi_mean
+0.1,0.4459958602118124,late: A(logreg) + emb_ppmi_mean
+0.2,0.43783215918922264,late: A(logreg) + emb_ppmi_mean
+0.3,0.4134150873281308,late: A(logreg) + emb_ppmi_mean
+0.4,0.40997705413395685,late: A(logreg) + emb_ppmi_mean
+0.5,0.41016599891490335,late: A(logreg) + emb_ppmi_mean
+0.6,0.380304217260739,late: A(logreg) + emb_ppmi_mean
+0.0,0.43948303064212874,late: A(logreg) + emb_minilm_mean
+0.1,0.42550505050505044,late: A(logreg) + emb_minilm_mean
+0.2,0.44009874808504823,late: A(logreg) + emb_minilm_mean
+0.3,0.42651650345134146,late: A(logreg) + emb_minilm_mean
+0.4,0.42201501275343584,late: A(logreg) + emb_minilm_mean
+0.5,0.4190566997203153,late: A(logreg) + emb_minilm_mean
+0.6,0.42519009634310584,late: A(logreg) + emb_minilm_mean
+0.0,0.43948303064212874,late: A(logreg) + emb_minilm_decay
+0.1,0.44682755388940953,late: A(logreg) + emb_minilm_decay
+0.2,0.4300667084929475,late: A(logreg) + emb_minilm_decay
+0.3,0.43572247572247574,late: A(logreg) + emb_minilm_decay
+0.4,0.41428357217830897,late: A(logreg) + emb_minilm_decay
+0.5,0.39670082092875064,late: A(logreg) + emb_minilm_decay
+0.6,0.3861659698070936,late: A(logreg) + emb_minilm_decay
+0.0,0.43948303064212874,late: A(logreg) + emb_minilm_attention
+0.1,0.4390778769733173,late: A(logreg) + emb_minilm_attention
+0.2,0.4318378445186009,late: A(logreg) + emb_minilm_attention
+0.3,0.43923167424423704,late: A(logreg) + emb_minilm_attention
+0.4,0.42480069794423364,late: A(logreg) + emb_minilm_attention
+0.5,0.4213313198576012,late: A(logreg) + emb_minilm_attention
+0.6,0.40819513819513825,late: A(logreg) + emb_minilm_attention
+0.0,0.43948303064212874,late: A(logreg) + emb_finbert_mean
+0.1,0.4501455750427463,late: A(logreg) + emb_finbert_mean
+0.2,0.4502126528442318,late: A(logreg) + emb_finbert_mean
+0.3,0.46179617676623663,late: A(logreg) + emb_finbert_mean
+0.4,0.4511136002817013,late: A(logreg) + emb_finbert_mean
+0.5,0.4408931082981716,late: A(logreg) + emb_finbert_mean
+0.6,0.4333778390329342,late: A(logreg) + emb_finbert_mean
+0.0,0.43948303064212874,late: A(logreg) + emb_finbert_decay
+0.1,0.43943097511053325,late: A(logreg) + emb_finbert_decay
+0.2,0.4323996265172736,late: A(logreg) + emb_finbert_decay
+0.3,0.4398943033089375,late: A(logreg) + emb_finbert_decay
+0.4,0.4435052233586852,late: A(logreg) + emb_finbert_decay
+0.5,0.4355250484282742,late: A(logreg) + emb_finbert_decay
+0.6,0.41780644886234947,late: A(logreg) + emb_finbert_decay
+0.0,0.43948303064212874,late: A(logreg) + emb_finbert_attention
+0.1,0.43213611804126967,late: A(logreg) + emb_finbert_attention
+0.2,0.4284408348668968,late: A(logreg) + emb_finbert_attention
+0.3,0.4292164359502715,late: A(logreg) + emb_finbert_attention
+0.4,0.4353632233310764,late: A(logreg) + emb_finbert_attention
+0.5,0.4350080533799727,late: A(logreg) + emb_finbert_attention
+0.6,0.4583386813845034,late: A(logreg) + emb_finbert_attention
+0.0,0.43948303064212874,late: A(logreg) + finbert_sent
+0.1,0.4459082094376212,late: A(logreg) + finbert_sent
+0.2,0.44580850184298465,late: A(logreg) + finbert_sent
+0.3,0.45318793630515125,late: A(logreg) + finbert_sent
+0.4,0.4461700755548776,late: A(logreg) + finbert_sent
+0.5,0.4392635497213894,late: A(logreg) + finbert_sent
+0.6,0.44197886153383664,late: A(logreg) + finbert_sent
+0.0,0.43948303064212874,late: A(logreg) + topics
+0.1,0.425587062295605,late: A(logreg) + topics
+0.2,0.4367819687916045,late: A(logreg) + topics
+0.3,0.43319305549270704,late: A(logreg) + topics
+0.4,0.45494036284191725,late: A(logreg) + topics
+0.5,0.4574561403508772,late: A(logreg) + topics
+0.6,0.44349254440129887,late: A(logreg) + topics
+0.0,0.43948303064212874,late: A(logreg) + entity
+0.1,0.44653357628668494,late: A(logreg) + entity
+0.2,0.4493328732459167,late: A(logreg) + entity
+0.3,0.44158606377950077,late: A(logreg) + entity
+0.4,0.42428948648460846,late: A(logreg) + entity
+0.5,0.4314519063996931,late: A(logreg) + entity
+0.6,0.4302498670919724,late: A(logreg) + entity
+0.0,0.43948303064212874,late: A(logreg) + fine-tuned MiniLM
+0.1,0.43948303064212874,late: A(logreg) + fine-tuned MiniLM
+0.2,0.4495741731035849,late: A(logreg) + fine-tuned MiniLM
+0.3,0.4419718372970975,late: A(logreg) + fine-tuned MiniLM
+0.4,0.4341066517987923,late: A(logreg) + fine-tuned MiniLM
+0.5,0.43276640306214564,late: A(logreg) + fine-tuned MiniLM
+0.6,0.4399660217738021,late: A(logreg) + fine-tuned MiniLM

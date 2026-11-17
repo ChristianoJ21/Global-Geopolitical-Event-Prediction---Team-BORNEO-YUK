@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Task 3 Report</title>
+<style>
+@font-face { font-family: "Calibri"; src: url("file:///Applications/Microsoft%20Word.app/Contents/Resources/DFonts/Calibri.ttf"); }
+@font-face { font-family: "Calibri"; font-weight: bold; src: url("file:///Applications/Microsoft%20Word.app/Contents/Resources/DFonts/Calibrib.ttf"); }
+@font-face { font-family: "Calibri"; font-style: italic; src: url("file:///Applications/Microsoft%20Word.app/Contents/Resources/DFonts/Calibrii.ttf"); }
+@page { size: A4; margin: 1.6cm 1.9cm 1.6cm 1.9cm; }
+:root { --ink: #111; --rule: #999; --head: #f0f0f0; }
+html { background: #fff; }
+body { font-family: "Calibri", "Carlito", Arial, sans-serif; font-size: 10.5pt; line-height: 1.32; color: var(--ink); margin: 0; background: #fff; }
+h1 { font-size: 15.5pt; text-align: center; margin: 0 0 2pt; }
+.sub { text-align: center; font-weight: bold; font-size: 11pt; margin: 0 0 6pt; }
+.head { display: flex; align-items: center; justify-content: center; gap: 14pt; margin-bottom: 4pt; }
+.head img { width: 58pt; }
+.names { font-weight: bold; font-size: 10pt; line-height: 1.35; }
+.gh { text-align: center; font-size: 9.5pt; margin-bottom: 6pt; }
+.gh a { color: #1155cc; }
+h2 { font-size: 12.5pt; margin: 9pt 0 3pt; break-after: avoid; }
+p, table, figure { orphans: 3; widows: 3; }
+h3 { font-size: 11pt; margin: 6pt 0 2pt; }
+p { margin: 3pt 0 4pt; text-align: left; }
+ul, ol { margin: 2pt 0 4pt; padding-left: 16pt; }
+li { margin: 1pt 0; }
+code { font-family: Consolas, Menlo, monospace; font-size: 8.8pt; background: #f3f3f3; padding: 0 2px; }
+table { border-collapse: collapse; width: 100%; margin: 4pt 0 5pt; font-size: 9pt; line-height: 1.22; }
+th, td { border: 0.6pt solid var(--rule); padding: 2pt 4pt; vertical-align: top; text-align: left; }
+th { background: var(--head); }
+td.n, th.n { text-align: right; white-space: nowrap; }
+.cap { font-size: 8.8pt; color: #333; margin: 1pt 0 5pt; }
+figure { margin: 4pt 0; text-align: center; }
+figure img { width: 100%; }
+.small { font-size: 9pt; }
+.avoid { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<h1>Global Geopolitical Event Prediction: Model Refinement &amp; Multimodal Integration</h1>
+<div class="sub">Task 3: Analyzing the Impact on the USD/IDR Exchange Rate</div>
+<div class="head">
+  <img src="report_assets/ugm_logo.jpeg" alt="UGM">
+  <div class="names">Christiano Jose Intoro - 24/546891/PA/23217<br>
+  Panji Merah Balakosa - 24/532826/PA/22541<br>
+  Aditya Evan Rahmadani - 24/536755/PA/22771</div>
+</div>
+<div class="gh">Github: <a href="https://github.com/ChristianoJ21/Global-Geopolitical-Event-Prediction---Team-BORNEO-YUK.git">https://github.com/ChristianoJ21/Global-Geopolitical-Event-Prediction---Team-BORNEO-YUK.git</a></div>
+
+<p>Task 2 left us with an honest but unsatisfying result: lexicon and TF-IDF features did not reliably help predict which way
+the rupiah moves at the next JISDOR fix. Task 3 asks whether <b>better representations of the news</b>, pre-trained and transformer
+embeddings fused with the exchange-rate history, change that. We kept everything else fixed (same target: UP / FLAT / DOWN with a
+0.10% dead-zone, same chronological split of 726 / 235 / 240 days, same rule: choose on validation, refit on train+validation, score
+test once) so any difference comes from the text. <b>Short answer:</b> the richer text beats Task 2's NLP features, but it still does
+not measurably beat a model that ignores the news. Part d shows why.</p>
+
+
+<h2>a. Feature extraction strategy</h2>
+<p>In Task 2 we were only allowed word lists and a TF-IDF we fitted ourselves. Task 3 lets us use pre-trained
+models, so the question became: <i>which</i> representation of a headline, and how do ~760 headlines a day turn into one row
+for the model? We picked four encoders as a 2&times;2, so that every comparison changes only one thing:
+static vs contextual, and general-purpose vs domain-specific. All four read the same headlines: the <b>100 most-copied
+headlines of each news day</b> (119,100 of Task 2's 905,713). These are the stories most outlets picked up (22.6% of the
+copy-weighted news), and one shared set keeps the comparison fair. We had planned to encode everything, but FinBERT on all
+905k headlines kept stalling on our 8&nbsp;GB laptop, so we chose a smaller set that every model could actually finish.</p>
+
+<table class="avoid">
+<tr><th>Encoder</th><th>Type</th><th>Trained on</th><th>Tokenisation &amp; pooling</th><th>Why we chose it</th></tr>
+<tr><td><b>GloVe 6B-300d</b></td><td>static, general</td><td>Wikipedia + Gigaword</td><td>lower-cased words, Track B; mean of word vectors (300-d)</td><td>The "what does general English already know" baseline. One vector per word, so <i>Turkey</i> the country and <i>turkey</i> the food are the same.</td></tr>
+<tr><td><b>PPMI-SVD</b> (ours)</td><td>static, our domain</td><td>our 2021-24 training headlines only</td><td>Track A lemmas (aliases merged); mean of word vectors (100-d)</td><td>SVD on a positive-PMI matrix optimises the same thing as Word2Vec skip-gram (Levy &amp; Goldberg, 2014). It learns our vocabulary: <i>fed</i> &rarr; powell, ecb, hawkish; <i>war</i> &rarr; invasion, ukraine.</td></tr>
+<tr><td><b>MiniLM-L6-v2</b></td><td>contextual, general</td><td>1B sentence pairs (similarity)</td><td>WordPiece, &le;64 tokens, Track B; mean pooling + L2 norm (384-d)</td><td>Built to put sentences with the same meaning close together, which is what topics and t-SNE need.</td></tr>
+<tr><td><b>FinBERT</b> (ProsusAI)</td><td>contextual, finance</td><td>BERT + financial news, tuned on Financial PhraseBank</td><td>WordPiece, &le;64 tokens, Track B; (1) [CLS] head &rarr; P(pos, neg, neu); (2) mean pooling of the last layer (768-d)</td><td>Reads tone the way a market analyst would, so "rate hike" or "default" carry meaning a general model misses.</td></tr>
+</table>
+
+<p><b>Tokenisation and pooling choices.</b> Transformers read <b>Track B</b> (cased, punctuation kept) because their WordPiece
+vocabularies were trained on raw text; feeding them our lemmas would be text they never saw. We cap at 64 tokens because 99% of
+headlines have 22 words or fewer, so nothing real is cut. We use <b>mean pooling</b> rather than the [CLS] vector: MiniLM was trained
+with mean pooling, and FinBERT's [CLS] was fine-tuned only to say positive/negative/neutral, so it throws away <i>what</i> the
+headline is about. We keep both from FinBERT: its sentiment head for tone, and the mean-pooled vector for content.</p>
+
+<p><b>Going beyond one sentiment score per article</b> (brief 1b). Every option below is its own feature block, so the ablation can tell them apart:</p>
+<ul>
+<li><b>Temporal aggregation:</b> (i) the daily mean, weighted by <code>log1p(dup_count)</code> as in Task 2; (ii) <b>exponential decay</b>
+with a 3-day half-life, because a war that started yesterday still matters today; (iii) <b>salience attention</b>, a within-day
+softmax over <code>log w + (1 &minus; P<sub>neutral</sub>)/T</code>, so widely copied <i>and</i> emotionally charged headlines dominate; and
+(iv) a <b>learned</b> attention inside the fusion network (part b).</li>
+<li><b>Topic modelling (BERTopic-style):</b> MiniLM vectors &rarr; k-means with 20 topics (centroids fitted on training headlines) &rarr;
+labels from class-based TF-IDF. Per day: the share of each topic and FinBERT's tone inside it.</li>
+<li><b>Entity filtering (NER):</b> <code>dslim/bert-base-NER</code> tags people, organisations and places in the 50 most-copied headlines of
+each day (59,550 headlines). We map them to a watchlist (US, Fed, Indonesia/BI, China, Russia-Ukraine, Middle East, central banks) and compute each group's
+share and tone. Unlike Task 1's keyword flags, NER reads context: "Powell" counts as the Fed.</li>
+<li><b>Fine-tuning:</b> MiniLM with a 3-class head, trained on the top-32 headlines of every <i>training</i> day (23,232 headlines), each labelled with the move of
+the fix its news feeds (1 epoch, lr 2e-5). Its probabilities are only used through late fusion, so it is never scored on days it trained on.</li>
+<li><b>Title vs full text:</b> not possible. GDELT gives no article bodies (Task 1), so every encoder sees headlines only.</li>
+</ul>
+<p><b>From vectors to features, without leakage.</b> A daily average of 768-d vectors is still 768 columns for 726 training days, so each
+block is cut to <b>16 PCA components fitted on training days only</b>. Everything else that is <i>fitted</i> (PPMI word vectors, topic centroids,
+fine-tuned weights) also sees only news before 30 Aug 2024. Every text feature gets the same one-day shift as in Tasks 1 and 2 (news of
+bucket <i>t&minus;1</i> sits next to fix <i>t</i>), and a test checks this on every run.</p>
+
+<h2>b. Multimodal architecture</h2>
+<p><b>X<sub>time</sub></b> is the 14 features of Task 2's best baseline: 10 JISDOR price features plus the overnight DXY, Brent and VIX
+controls. <b>X<sub>text</sub></b> is any of the text blocks above. We tried all three standard ways of merging them, and each is
+selected on validation like everything else:</p>
+<figure><img src="task3_architecture.png" alt="architecture"></figure>
+<ul class="small">
+<li><b>Early fusion:</b> concatenate [X<sub>time</sub> | X<sub>text</sub>] and train one logistic regression or XGBoost (the Task 2 models and grid).
+Simple, and trees can learn interactions, but 16 text columns compete with 14 strong market columns for the same 726 days.</li>
+<li><b>Late fusion:</b> one model per modality, then <code>log p = (1&minus;w)&middot;log p<sub>time</sub> + w&middot;log p<sub>text</sub></code>. The weight
+<i>w</i> &isin; {0, 0.1, &hellip;, 0.6} is picked on validation, and <i>w</i> = 0 is exactly Model A, so <i>w</i> tells us directly how much the data trusts the news.</li>
+<li><b>Attention fusion network</b> (PyTorch): the day's top-64 headline vectors &rarr; Linear+tanh (32) &rarr; attention with a learned query
+(plus the log copy-count as a prior) &rarr; a 32-d text vector, concatenated with an MLP embedding of X<sub>time</sub> &rarr; dropout &rarr; softmax over
+DOWN/FLAT/UP. Class-balanced loss, weight decay, early stopping on validation macro-F1, 3 seeds.</li>
+</ul>
+
+<h2>c. Ablation matrix &amp; discussion</h2>
+<p><b>Model A</b> is the time series only (the 14 X<sub>time</sub> features, Task 2's best baseline), <b>Model B</b> adds Task 2's 46 lexicon
+and TF-IDF features, and <b>Model C</b> adds the Task 3 text block that won on <i>validation</i>. Among all 36 Task 3 configurations (part b and the
+table below), the winner was FinBERT's tone features with XGBoost (val macro-F1 0.465). We then re-tuned it on a wider grid (6 values of C for
+logistic regression; 36 XGBoost settings over depth, number of trees, learning rate and min-child-weight; PCA size is tuned only for embedding
+blocks, so it did not apply here). The original settings stayed best. XGBoost results are the mean &plusmn; std over 3 seeds.</p>
+
+<table class="avoid">
+<tr><th rowspan="2">Model (macro-F1)</th><th colspan="2">Logistic regression</th><th colspan="2">XGBoost (3 seeds)</th><th rowspan="2">Test accuracy<br>(LR / XGB)</th></tr>
+<tr><th class="n">val</th><th class="n">test</th><th class="n">val</th><th class="n">test</th></tr>
+<tr><td>A0: price history only</td><td class="n">0.403</td><td class="n">0.321</td><td class="n">0.371 &plusmn; .005</td><td class="n">0.351 &plusmn; .014</td><td class="n">0.338 / 0.353</td></tr>
+<tr><td><b>A: time series only</b> (price + overnight markets)</td><td class="n">0.439</td><td class="n"><b>0.458</b></td><td class="n">0.439 &plusmn; .006</td><td class="n">0.440 &plusmn; .014</td><td class="n">0.458 / 0.442</td></tr>
+<tr><td>B: A + Task 2 basic NLP (46)</td><td class="n"><b>0.509</b></td><td class="n">0.388</td><td class="n"><b>0.479</b> &plusmn; .014</td><td class="n">0.431 &plusmn; .007</td><td class="n">0.392 / 0.428</td></tr>
+<tr><td><b>C: A + Task 3 text</b> (FinBERT tone, 13)</td><td class="n">0.456</td><td class="n">0.422</td><td class="n">0.443 &plusmn; .022</td><td class="n"><b>0.445</b> &plusmn; .009</td><td class="n">0.421 / 0.444</td></tr>
+<tr><td>B + C</td><td class="n">0.414</td><td class="n">0.403</td><td class="n">0.450 &plusmn; .034</td><td class="n">0.434 &plusmn; .011</td><td class="n">0.404 / 0.431</td></tr>
+</table>
+<p class="cap">Reference points on test: majority class 0.190, persistence 0.370. 95% block-bootstrap intervals (10-day blocks) on the test gain, seed-42 models:
+C vs A: LR &minus;0.036 [&minus;0.08, +0.00], XGB &minus;0.002 [&minus;0.07, +0.06]. C vs B: LR +0.034 [&minus;0.08, +0.13], XGB +0.027 [&minus;0.04, +0.10].
+B vs A: LR &minus;0.070 [&minus;0.16, +0.04], XGB &minus;0.030 [&minus;0.11, +0.03].</p>
+
+<p><b>Every representation, strategy and fusion.</b> Test macro-F1 when each block is added to A (early fusion), used alone (text only, logistic
+regression), and combined through late fusion with the weight <i>w</i> that validation chose:</p>
+<table class="avoid small">
+<tr><th>Text block (16 PCA components unless noted)</th><th class="n">A + block, LR</th><th class="n">A + block, XGB</th><th class="n">text only</th><th class="n">late fusion (w)</th></tr>
+<tr><td>GloVe, daily mean <i>(static, general)</i></td><td class="n">0.418</td><td class="n">0.457</td><td class="n">0.302</td><td class="n">0.424 (0.3)</td></tr>
+<tr><td>PPMI-SVD, daily mean <i>(static, our corpus)</i></td><td class="n">0.433</td><td class="n">0.498</td><td class="n">0.363</td><td class="n">0.454 (0.1)</td></tr>
+<tr><td>MiniLM, daily mean <i>(contextual, general)</i></td><td class="n">0.416</td><td class="n">0.463</td><td class="n">0.305</td><td class="n">0.448 (0.2)</td></tr>
+<tr><td>FinBERT, daily mean <i>(contextual, finance)</i></td><td class="n">0.454</td><td class="n">0.487</td><td class="n">0.321</td><td class="n">0.461 (0.3)</td></tr>
+<tr><td>MiniLM: exponential decay / salience attention</td><td class="n">0.429 / 0.442</td><td class="n">0.499 / 0.414</td><td class="n">0.291 / 0.332</td><td class="n">0.455 / 0.458</td></tr>
+<tr><td>FinBERT: exponential decay / salience attention</td><td class="n">0.424 / 0.386</td><td class="n">0.430 / 0.456</td><td class="n">0.282 / 0.247</td><td class="n">0.443 / 0.334</td></tr>
+<tr><td>FinBERT tone per theme (13 features) = Model C</td><td class="n">0.422</td><td class="n">0.455</td><td class="n">0.302</td><td class="n">0.454 (0.3)</td></tr>
+<tr><td>Topics: 20 shares + 20 tones</td><td class="n">0.421</td><td class="n">0.432</td><td class="n">0.332</td><td class="n">0.452 (0.5)</td></tr>
+<tr><td>NER entity filter: 7 groups &times; (share, tone)</td><td class="n">0.452</td><td class="n">0.463</td><td class="n">0.350</td><td class="n">0.470 (0.2)</td></tr>
+<tr><td>Fine-tuned MiniLM (late fusion only)</td><td class="n">&ndash;</td><td class="n">&ndash;</td><td class="n">&ndash;</td><td class="n">0.453 (0.2)</td></tr>
+<tr><td>Attention fusion network: FinBERT / MiniLM</td><td class="n" colspan="4">test 0.391 / 0.422 (seed ensembles; single seeds 0.389&ndash;0.396 / 0.424&ndash;0.440); validation 0.444 / 0.431</td></tr>
+</table>
+
+<p><b>What the results tell us:</b></p>
+<ol>
+<li><b>The transformers did not measurably improve direction forecasting.</b> Model C scores 0.445 &plusmn; 0.009 on test with XGBoost against 0.440 for A,
+and 0.422 against 0.458 with logistic regression. Every interval for C vs A includes zero. The Task 2 conclusion still holds: almost all of the skill
+comes from the overnight dollar and VIX, not from the headlines.</li>
+<li><b>They are better than Task 2's NLP.</b> C beats B with both models (+0.03), and B is the configuration that fooled validation most
+(0.509 on validation, 0.388 on test). The FinBERT features overfit the validation year less than the 46 lexicon columns did.</li>
+<li><b>Some Task 3 variants look good on test</b> (PPMI 0.498, MiniLM with decay 0.499, FinBERT mean 0.487, all with XGBoost), but none of them
+won on validation (their validation scores were 0.459 to 0.462, against C's 0.465). Picking them now would mean choosing on the test set, so we only
+report them.</li>
+<li><b>Domain-specific beats general, and contextual beats static, but only a little.</b> With XGBoost, FinBERT (0.487) beats MiniLM (0.463), and our
+own PPMI vectors (0.498) beat general-purpose GloVe (0.457). Text alone stays near chance (0.25 to 0.36), so no encoder can predict the rupiah from
+headlines by itself.</li>
+<li><b>Fancier fusion did not help.</b> Late fusion gives the news a weight of 0.1 to 0.5, so validation sees <i>some</i> value, but test
+macro-F1 stays within about &plusmn;0.02 of A (NER at 0.470 is the exception, and it was not the validation winner either). The attention network does
+worst on test (0.39 to 0.42): with 726 training days it overfits despite dropout, weight decay and early stopping. Fine-tuned MiniLM reached only 37%
+headline-level accuracy, below the 42% majority share, because the labels are far too noisy at the headline level.</li>
+<li><b>The secondary target agrees.</b> Next-day return RMSE on test is 0.264 for A, 0.269 for B and 0.268 for C (Ridge). The zero forecast scores 0.278.</li>
+</ol>
+
+
+<h2>d. Open exploratory analysis: why the news does not transfer</h2>
+<p><b>1. Embedding space: headlines before calm and before volatile days look the same.</b> We took the 15% most and least volatile training days
+(measured by the size of the move the news feeds) and plotted 1,500 headlines from each with t-SNE. For every encoder the two groups are completely
+mixed. A linear probe confirms it: ROC-AUC is 0.51 for FinBERT, 0.50 for MiniLM and 0.51 for GloVe at headline level, and below 0.5 at day level.</p>
+<figure><img src="../reports/task3/figures/tsne_volatility.png" alt="t-SNE"></figure>
+
+<p><b>2. The real problem is drift, and we can measure it.</b> We asked a simple classifier to guess whether a day comes from the training period
+(2021-24) or the test year (2025-26), using one feature block at a time (5-fold ROC-AUC; 0.5 means it cannot tell):</p>
+<table class="avoid small">
+<tr><th>Block</th><th class="n">price</th><th class="n">markets</th><th class="n">Task 2 NLP</th><th class="n">GloVe</th><th class="n">PPMI</th><th class="n">MiniLM</th><th class="n">FinBERT</th><th class="n">FinBERT tone</th><th class="n">topics</th><th class="n">entities</th></tr>
+<tr><td>train vs test AUC</td><td class="n">0.55</td><td class="n">0.51</td><td class="n">0.99</td><td class="n">0.88</td><td class="n">0.96</td><td class="n">0.93</td><td class="n">0.94</td><td class="n">0.83</td><td class="n">0.92</td><td class="n">0.94</td></tr>
+</table>
+<p>The market features look the same in both periods, so what a model learns from them carries over. Every text block gives the era away:
+2021-24 news is COVID, the invasion of Ukraine, Gaza and the US election, while 2025-26 is tariffs and Iran. A model fitted on old news is always
+extrapolating, which is the simplest explanation for validation gains (B: 0.509) falling apart on test (0.388). FinBERT's tone features drift the
+least of the text blocks (0.83), which fits with them winning on validation.</p>
+
+<p><b>3. What does Model C actually use?</b> TreeSHAP on the XGBoost Model C (test days) splits the decision almost evenly: markets 34%, price 33%,
+FinBERT tone 33%. The top features are the overnight dollar (<code>lag1_ret_DXY</code>) and the change in VIX. The text features it relies on most are
+FinBERT's net tone on <b>sanctions/trade</b>, <b>energy</b> and <b>diplomacy</b> news, exactly the themes that should matter for an emerging-market
+currency. Without being told, the attention network put its highest weights on Russia-Ukraine strikes on energy sites ("Ukrainian drones hit St
+Petersburg region oil terminal"). So the text features are sensible; they just are not stable enough to pay off. Among the topics, the share of
+labour-strike news and of COVID news relate most to the <i>size</i> of the next move (Spearman 0.12 and &minus;0.11, p &lt; 0.01) but not to its
+direction. That is the same "size, not sign" pattern Task 2 found.</p>
+
+<p><b>4. Error analysis: when did the news help, and when did it hurt?</b> Of the 240 test days, A and C (logistic regression) are both right or both
+wrong on 217. C fixed 7 of A's mistakes and made 16 new ones (McNemar p = 0.09). The pattern is consistent: the news makes the model <b>more cautious</b>.</p>
+<ul>
+<li><b>Helped (false signals avoided):</b> on all 5 days where C corrected one of A's wrong UP/DOWN calls, the market was truly FLAT. Examples:
+13 Oct 2025 ("Trump says there seems to be no reason to meet China's Xi"; A said UP, the rupiah moved &minus;0.03%) and 20 Oct 2025 (India importing US oil
+under tariff pressure; A said DOWN, the move was &minus;0.03%).</li>
+<li><b>Hurt (text added noise):</b> the costly mistakes are big-move days where A was right and C hedged to FLAT: 18 May 2026 (+0.97%, "President Trump
+arrives in China"), 10 Aug 2026 (&minus;0.66%) and 28 Jan 2026 (&minus;0.47%, "Gold price reaches new all-time high"). On the third of test days with the
+largest moves, C's error rate is 0.54 against A's 0.40. On the quietest third, C does better (0.53 against 0.56).</li>
+</ul>
+<figure class="avoid"><img src="../reports/task3/figures/error_by_regime.png" alt="error by regime" style="width:82%"></figure>
+<p class="cap">Test error rate of A and C (logistic regression) by tercile of the size of the move, the news volume and FinBERT's net tone. The news
+features help a little on quiet days and cost the most on the biggest moves.</p>
+<p><b>Bottom line.</b> Better text representations made the news features <i>cleaner</i>: C beats B, and the features are interpretable. But the
+headline signal for USD/IDR is weak, and its meaning drifts from year to year faster than 726 training days can follow. For Task 4 the evidence
+points to (i) rolling re-training, so the text model always sees recent news, (ii) using news to forecast the <i>size</i> of the move, or to decide when
+to trust the price model, rather than its direction, and (iii) adding Indonesia-specific sources, since only 0.1% of our top headlines mention
+Indonesia at all.</p>
+
+<p class="small"><b>Repository.</b> <code>src/</code>: <code>text_embeddings.py</code> (GloVe, PPMI-SVD, MiniLM, FinBERT), <code>text_features.py</code>
+(pooling, PCA, topics), <code>entity_filter.py</code> (NER), <code>finetune_text.py</code>, <code>fusion.py</code> (early and late fusion, attention network),
+<code>run_task3.py</code> (the driver), <code>analysis_task3.py</code>. <code>data/splits/task3/</code>: train / val / test with every Task 3 feature.
+<code>notebooks/task3/</code>: the executed notebook with the ablation, feature importance and error distributions. <code>tests/test_task3.py</code>: 8 leakage
+and timing tests.</p>
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+regime,tercile,n,error_A,error_C
+size of the move,low,80,0.5625,0.525
+size of the move,mid,80,0.6625,0.675
+size of the move,high,80,0.4,0.5375
+news volume (z30),low,80,0.55,0.5875
+news volume (z30),mid,80,0.55,0.5875
+news volume (z30),high,80,0.525,0.5625
+FinBERT net tone,low,80,0.5,0.5625
+FinBERT net tone,mid,80,0.5625,0.5375
+FinBERT net tone,high,80,0.5625,0.6375
